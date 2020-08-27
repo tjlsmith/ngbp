@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // var gridView = findViewById(R.id.gridlayout) as GridView
+        initTheGame()
     }
 
     fun kaBoom(v: View?) {
@@ -28,11 +30,10 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
-        main(row, col)
+        mainGamePlay(row, col)
         val dummy = 1
         //val col = imgBtn.name
         //val row = imgBtn.NGBP.rowCount
-
     }
 
 }
