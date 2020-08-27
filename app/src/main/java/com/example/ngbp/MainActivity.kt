@@ -8,13 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        initTheGame()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initTheGame()
     }
 
     fun kaBoom(v: View?) {
