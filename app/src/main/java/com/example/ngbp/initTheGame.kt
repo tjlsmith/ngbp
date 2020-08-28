@@ -1,13 +1,13 @@
 package com.example.ngbp
 
-data class ship(val name: String, val length: Int)
+fun initTheGame(): initVals {
 
-fun initTheGame() {
-
-    // return state of enemy's board
-    val humanBoard = Array(10) { IntArray(10) }
+    // actual position of ships on human board
+    var unKnownHumanBoard = Array(10) { IntArray(10) }
+    // return state of enemy's board - what ngbp learns through shelling
+    var knownHumanBoard = Array(10) { IntArray(10) }
     // return computer's board
-    val ngbpBoard = Array(10) { IntArray(10) }
+    var ngbpBoard = Array(10) { IntArray(10) }
 
     // return available enemy ship list
     var shipList = arrayOf<ship>()
@@ -22,9 +22,16 @@ fun initTheGame() {
         points += ship.length
     }
 
+    // https://lawcomic.net/guide/?p=864
+
     // return points for each player -> 20 in the default configuration
     var humanPoint = points
     var ngbpPoint = points
+
+    val retVal =
+        initVals(ngbpPoint, humanPoint, ngbpBoard, unKnownHumanBoard, knownHumanBoard, shipList)
+
+    return retVal
 }
 
 fun addElement(arr: Array<ship>, element: ship): Array<ship> {

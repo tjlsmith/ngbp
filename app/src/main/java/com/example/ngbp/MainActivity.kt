@@ -5,11 +5,24 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
+data class ship(val name: String, val length: Int)
+data class initVals(
+    val humanPoint: Int,
+    val ngbpPoint: Int,
+    var unKnownHumanBoard: Array<*>,
+    var knownHumanBoard: Array<*>,
+    var ngbpBoard: Array<*>,
+    val shipList: Array<*>
+)
+
+    var unKnownHumanBoard = Array(10) { IntArray(10) }
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        initTheGame()
+
+        var (humanPoint, ngbpPoint, ngbpBoard, unKnownHumanBoard, knownHumanBoard, shipList) = initTheGame()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
-        mainGamePlay(row, col)
+        mainGamePlay(row, col, imgBtn, *unKnownHumanBoard)
         val dummy = 1
         //val col = imgBtn.name
         //val row = imgBtn.NGBP.rowCount
