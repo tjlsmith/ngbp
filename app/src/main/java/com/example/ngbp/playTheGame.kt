@@ -15,6 +15,7 @@ fun mainGamePlay(row: Int, col: Int, btn: ImageButton, vararg ukhb: IntArray) {
     if (rowBoard.get(col) == 0) {
         // water
         btn.setBackgroundColor(android.graphics.Color.BLUE)
+        btn.setClickable(false) // can't reclick a square
         dummy = 0
-    }
+    }else{}
 }
