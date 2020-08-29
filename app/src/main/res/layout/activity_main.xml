@@ -1258,14 +1258,13 @@
             android:id="@+id/imageButtonC95"
             android:layout_width="30dp"
             android:layout_height="30dp"
-			android:background="#FFFFFF"
+            android:background="#FFFFFF"
             android:clickable="true"
             android:contextClickable="true"
             android:onClick="kaBoom"
             android:tag="95"
             app:layout_column="5"
-            app:layout_row="9"
-              />
+            app:layout_row="9" />
 
         <ImageButton
             android:id="@+id/imageButtonC96"
@@ -2247,5 +2246,56 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NGBP" />
+
+    <TextView
+        android:id="@+id/NGBPPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="144dp"
+        android:text="NGBP"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Human"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/HPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="243dp"
+        android:text="H"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/NGBP"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/HumanScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="20"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/NGBP"
+        app:layout_constraintTop_toBottomOf="@+id/HPoints" />
+
+    <TextView
+        android:id="@+id/NGBPScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="20"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Human"
+        app:layout_constraintTop_toBottomOf="@+id/NGBPPoints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
