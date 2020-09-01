@@ -7,7 +7,7 @@ import android.widget.ImageButton
 // Array(10){IntArray(10)}
 // Array<*>
 
-fun mainGamePlay(row: Int, col: Int, btn: ImageButton, khb: IntArray, ukhb: IntArray) {
+fun mainGamePlay(row: Int, col: Int, btn: ImageButton, khb: IntArray, ukhb: IntArray,shipList:Array<ship>) {
     val btnIndex = 10 * row + col // 1 d array
     val khbElement = khb.get(btnIndex)
     var dummy = 0
@@ -23,5 +23,5 @@ fun mainGamePlay(row: Int, col: Int, btn: ImageButton, khb: IntArray, ukhb: IntA
         dummy = 0
     } else {
     }
-    val pdf = makePdf()
+    val pdf = makePdf(khb,shipList)
 }

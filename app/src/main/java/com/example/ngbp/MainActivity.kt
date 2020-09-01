@@ -10,20 +10,27 @@ data class initVals(
     val humanPoint: Int,
     val ngbpPoint: Int,
     var ngbpBoard: IntArray,
-    var unKnownHumanBoard: IntArray,
-    var knownHumanBoard: IntArray,
     val shipList: Array<*>
 )
 
-var unKnownHumanBoard = IntArray(100)
-var knownHumanBoard = IntArray(100)
+// return available enemy ship list
+var shipList = arrayOf<ship>(
+    ship("Aircraft Carrier", 6),
+    ship("BattleShip", 5),
+    ship("Destroyer", 4),
+    ship("Cruiser", 3),
+    ship("Submarine", 2)
+)
+
+var unKnownHumanBoard = IntArray(100){0}
+var knownHumanBoard = IntArray(100){-1}
 
 class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        var (humanPoint, ngbpPoint, ngbpBoard, unKnownHumanBoard, knownHumanBoard, shipList) = initTheGame()
+        var (humanPoint, ngbpPoint, ngbpBoard,  shipList) = initTheGame()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -42,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
-        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard)
+        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, shipList)
         val dummy = 1
         //val col = imgBtn.name
         //val row = imgBtn.NGBP.rowCount

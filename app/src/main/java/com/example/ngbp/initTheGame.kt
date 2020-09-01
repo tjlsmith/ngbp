@@ -4,20 +4,12 @@ fun initTheGame(): initVals {
 
     // actual position of ships on human board
     // var unKnownHumanBoard = Array(10) { IntArray(10) }
-    var unKnownHumanBoard = IntArray(100)
+    //var unKnownHumanBoard = IntArray(100) { 0 }
     // return state of enemy's board - what ngbp learns through shelling
     //var knownHumanBoard = Array(10) { IntArray(10) {-1}} // default to -1
-    var knownHumanBoard =  IntArray(100) {-1} // default to -1
+    //var knownHumanBoard = IntArray(100) { -1 } // default to -1
     // return computer's board
-    var ngbpBoard = IntArray(10)
-
-    // return available enemy ship list
-    var shipList = arrayOf<ship>()
-    shipList = addElement(shipList, ship("Aircraft Carrier", 6))
-    shipList = addElement(shipList, ship("BattleShip", 5))
-    shipList = addElement(shipList, ship("Destroyer", 4))
-    shipList = addElement(shipList, ship("Cruiser", 3))
-    shipList = addElement(shipList, ship("Submarine", 2))
+    var ngbpBoard = IntArray(100) { 0 }
 
     var points = 0
     for (ship in shipList) {
@@ -31,7 +23,7 @@ fun initTheGame(): initVals {
     var ngbpPoint = points
 
     val retVal =
-        initVals(ngbpPoint, humanPoint, ngbpBoard, unKnownHumanBoard, knownHumanBoard, shipList)
+        initVals(ngbpPoint, humanPoint, ngbpBoard, shipList)
 
     return retVal
 }
