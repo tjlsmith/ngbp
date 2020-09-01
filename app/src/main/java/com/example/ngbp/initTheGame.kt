@@ -3,11 +3,13 @@ package com.example.ngbp
 fun initTheGame(): initVals {
 
     // actual position of ships on human board
-    var unKnownHumanBoard = Array(10) { IntArray(10) }
+    // var unKnownHumanBoard = Array(10) { IntArray(10) }
+    var unKnownHumanBoard = IntArray(100)
     // return state of enemy's board - what ngbp learns through shelling
-    var knownHumanBoard = Array(10) { IntArray(10) }
+    //var knownHumanBoard = Array(10) { IntArray(10) {-1}} // default to -1
+    var knownHumanBoard =  IntArray(100) {-1} // default to -1
     // return computer's board
-    var ngbpBoard = Array(10) { IntArray(10) }
+    var ngbpBoard = IntArray(10)
 
     // return available enemy ship list
     var shipList = arrayOf<ship>()

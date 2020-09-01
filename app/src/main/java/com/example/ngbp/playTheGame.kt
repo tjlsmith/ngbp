@@ -1,21 +1,27 @@
 package com.example.ngbp
 
 import android.graphics.Color
+import android.graphics.Color.WHITE
 import android.widget.ImageButton
 
 // Array(10){IntArray(10)}
 // Array<*>
 
-fun mainGamePlay(row: Int, col: Int, btn: ImageButton, vararg ukhb: IntArray) {
-    //println("Hello World!")
-    //val unKnownHumanBoard = Array(10) { IntArray(10) }
-    //unKnownHumanBoard = ukhb
-    val rowBoard = ukhb.get(row)
+fun mainGamePlay(row: Int, col: Int, btn: ImageButton, khb: IntArray, ukhb: IntArray) {
+    val btnIndex = 10 * row + col // 1 d array
+    val khbElement = khb.get(btnIndex)
     var dummy = 0
-    if (rowBoard.get(col) == 0) {
+    // android.graphics.Color.WHITE
+    if (khbElement != -1) { // already selected
+        return
+    }
+    if (ukhb.get(btnIndex) == 0) {
         // water
         btn.setBackgroundColor(android.graphics.Color.BLUE)
-        btn.setClickable(false) // can't reclick a square
+        btn.isClickable = false // can't reclick a square
+        khb.set(btnIndex, 0) // water
         dummy = 0
-    }else{}
+    } else {
+    }
+    val pdf = makePdf()
 }
