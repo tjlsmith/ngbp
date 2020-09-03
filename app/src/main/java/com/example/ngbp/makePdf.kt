@@ -1,7 +1,7 @@
 package com.example.ngbp
 
-fun makePdf(khb: IntArray, shipList: Array<ship>) {
-// return pdf of possible ships on human board
+fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray{
+    // return pdf of possible ships on human board
     var pdfBoard = IntArray(100) { 0 }
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
     var list = mutableListOf<Int>()
@@ -15,7 +15,7 @@ fun makePdf(khb: IntArray, shipList: Array<ship>) {
                         val vdRow = vectors[2 * vd]
                         val vdCol = vectors[2 * vd + 1]
                         var good = true
-                        for (l in 0..shipLen) {
+                        for (l in 0..shipLen - 1) {
                             val newRow = row + l * vdRow
                             val newCol = col + l * vdCol
                             val newIndex = newRow * 10 + newCol
@@ -27,8 +27,7 @@ fun makePdf(khb: IntArray, shipList: Array<ship>) {
                             list.add(newCol)
                         }
                         if (good) {
-                            var dummy = 1
-                            for (i in 0..(list.size / 2)-1) {
+                            for (i in 0..(list.size / 2) - 1) {
                                 val index = list[2 * i] * 10 + list[2 * i + 1]
                                 pdfBoard[index]++
                             }
@@ -38,5 +37,5 @@ fun makePdf(khb: IntArray, shipList: Array<ship>) {
             }
         }
     }
-
+    return pdfBoard
 }
