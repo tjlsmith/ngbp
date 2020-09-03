@@ -22,15 +22,15 @@ var shipList = arrayOf<ship>(
     ship("Submarine", 2)
 )
 
-var unKnownHumanBoard = IntArray(100){0}
-var knownHumanBoard = IntArray(100){-1}
+var unKnownHumanBoard = IntArray(100) { 0 }
+var knownHumanBoard = IntArray(100) { -1 }
 
 class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        var (humanPoint, ngbpPoint, ngbpBoard,  shipList) = initTheGame()
+        var (humanPoint, ngbpPoint, ngbpBoard, shipList) = initTheGame()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

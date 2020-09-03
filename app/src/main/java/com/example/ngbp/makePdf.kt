@@ -1,6 +1,6 @@
 package com.example.ngbp
 
-fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray{
+fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray {
     // return pdf of possible ships on human board
     var pdfBoard = IntArray(100) { 0 }
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
