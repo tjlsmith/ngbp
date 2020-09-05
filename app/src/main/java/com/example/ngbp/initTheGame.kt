@@ -23,13 +23,16 @@ fun initTheGame(): initVals {
     var ngbpPoint = points
 
     val retVal =
-        initVals(ngbpPoint, humanPoint, ngbpBoard, shipList)
+        initVals(ngbpBoard, shipList)
 
     return retVal
 }
 
+/*
 fun addElement(arr: Array<ship>, element: ship): Array<ship> {
     val mutableArray = arr.toMutableList()
     mutableArray.add(element)
     return mutableArray.toTypedArray()
 }
+*/
+
