@@ -15,8 +15,6 @@ const val WATER = 0
 const val CLOUD = -1
 const val FIRE = 2
 
-
-// return available enemy ship list
 var shipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6),
     ship("BattleShip", 5),
@@ -26,19 +24,28 @@ var shipList = arrayOf<ship>(
 )
 
 class MainActivity : AppCompatActivity() {
+    // Do not initialize yet
+    // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
+    private lateinit var ngbpBoard: IntArray
+    private lateinit var shipList: Array<ship>
 
     var unKnownHumanBoard = IntArray(100) { WATER }
     var knownHumanBoard = IntArray(100) { CLOUD }
-    var ngbpBoard = IntArray(100) { WATER }
+
+    //(ngbpBoard, shipList) = com.example.ngbp.initTheGame()
+    //lateinit var ngbpBoard = IntArray(100) { WATER }
     var humanPoint = 20
     var ngbpPoint = 20
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        var (ngbpBoard, shipList) = initTheGame()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val (ngbpBoard, shipList) = initTheGame()
+        // Initialize this variable
+        this.ngbpBoard = ngbpBoard
+        // this.shipList = shipList
     }
 
     fun kaBoom(v: View?) {

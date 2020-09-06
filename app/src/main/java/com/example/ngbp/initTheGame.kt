@@ -11,6 +11,16 @@ fun initTheGame(): initVals {
     // return computer's board
     //var ngbpBoard = IntArray(100) { 0 }
 
+    // return available enemy ship list
+    /*
+    var shipList = arrayOf<ship>(
+        ship("Aircraft Carrier", 6),
+        ship("BattleShip", 5),
+        ship("Destroyer", 4),
+        ship("Cruiser", 3),
+        ship("Submarine", 2)
+    )
+     */
     var points = 0
     for (ship in shipList) {
         points += ship.length
