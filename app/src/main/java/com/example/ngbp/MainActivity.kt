@@ -11,6 +11,11 @@ data class initVals(
     val shipList: Array<*>
 )
 
+const val WATER = 0
+const val CLOUD = -1
+const val FIRE = 2
+
+
 // return available enemy ship list
 var shipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6),
@@ -22,9 +27,9 @@ var shipList = arrayOf<ship>(
 
 class MainActivity : AppCompatActivity() {
 
-    var unKnownHumanBoard = IntArray(100) { 0 }
-    var knownHumanBoard = IntArray(100) { -1 }
-    var ngbpBoard = IntArray(100) { 0 }
+    var unKnownHumanBoard = IntArray(100) { WATER }
+    var knownHumanBoard = IntArray(100) { CLOUD }
+    var ngbpBoard = IntArray(100) { WATER }
     var humanPoint = 20
     var ngbpPoint = 20
 

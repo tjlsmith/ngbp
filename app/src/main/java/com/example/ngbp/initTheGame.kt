@@ -9,7 +9,7 @@ fun initTheGame(): initVals {
     //var knownHumanBoard = Array(10) { IntArray(10) {-1}} // default to -1
     //var knownHumanBoard = IntArray(100) { -1 } // default to -1
     // return computer's board
-    var ngbpBoard = IntArray(100) { 0 }
+    //var ngbpBoard = IntArray(100) { 0 }
 
     var points = 0
     for (ship in shipList) {
@@ -21,6 +21,8 @@ fun initTheGame(): initVals {
     // return points for each player -> 20 in the default configuration
     var humanPoint = points
     var ngbpPoint = points
+
+    var ngbpBoard = makeNGBPBoard() // put ships on computers board
 
     val retVal =
         initVals(ngbpBoard, shipList)

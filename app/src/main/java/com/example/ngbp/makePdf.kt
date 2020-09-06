@@ -2,7 +2,7 @@ package com.example.ngbp
 
 fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray {
     // return pdf of possible ships on human board
-    var pdfBoard = IntArray(100) { 0 }
+    var pdfBoard = IntArray(100) { WATER } // init to zero
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
     var list = mutableListOf<Int>()
     for (ship in shipList) { // do this ship
@@ -45,7 +45,7 @@ fun check(
         val newRow = row + l * vdRow
         val newCol = col + l * vdCol
         val newIndex = newRow * 10 + newCol
-        if (newCol < 0 || newRow < 0 || newCol > 9 || newRow > 9 || (board[newIndex] != -1)) {
+        if (newCol < 0 || newRow < 0 || newCol > 9 || newRow > 9 || (board[newIndex] != CLOUD)) {
             good = false // must be in bounds and unknown
             break
         }
