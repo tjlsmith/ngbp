@@ -14,20 +14,21 @@ fun mainGamePlay(
     khb: IntArray,
     ukhb: IntArray,
     ngbpBoard: IntArray,
-    shipList: Array<ship>
+    //shipList: Array<ship>
 ) {
     // human move shelling ngbp board
     val btnIndex = 10 * row + col // 1 d array
-    val ngboElement = ngbpBoard.get(btnIndex)
+    val ngboElement = ngbspStateBoard.get(btnIndex)
     var dummy = 0
     // android.graphics.Color.WHITE
-    if (ngboElement != -1) { // already selected
+    if (ngboElement != WATER) { // already selected
         return
     }
     if (ngbpBoard.get(btnIndex) == 0) {
         // water
         btn.setBackgroundColor(android.graphics.Color.BLUE)
         btn.isClickable = false // can't reclick a square
+        ngbspStateBoard.set(btnIndex, 1) // cant reclick
         //ngbpBoard.set(btnIndex, 0) // water
         dummy = 0
     } else {

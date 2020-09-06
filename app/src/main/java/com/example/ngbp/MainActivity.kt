@@ -22,12 +22,13 @@ var shipList = arrayOf<ship>(
     ship("Cruiser", 3),
     ship("Submarine", 2)
 )
+var ngbspStateBoard = IntArray(100) { WATER } // element set to one when its button is clicked
 
 class MainActivity : AppCompatActivity() {
     // Do not initialize yet
     // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
     private lateinit var ngbpBoard: IntArray
-    private lateinit var shipList: Array<ship>
+    //private lateinit var shipList: Array<ship>
 
     var unKnownHumanBoard = IntArray(100) { WATER }
     var knownHumanBoard = IntArray(100) { CLOUD }
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val (ngbpBoard, shipList) = initTheGame()
+        //val ngbpBoard = initTheGame()
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
         // this.shipList = shipList
@@ -61,7 +63,8 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
-        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
+        // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
+        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard)
         val dummy = 1
         //val col = imgBtn.name
         //val row = imgBtn.NGBP.rowCount
