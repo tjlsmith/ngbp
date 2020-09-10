@@ -22,7 +22,7 @@ var shipList = arrayOf<ship>(
     ship("Cruiser", 3),
     ship("Submarine", 2)
 )
-var ngbspStateBoard = IntArray(100) { WATER } // element set to one when its button is clicked
+var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
 
 class MainActivity : AppCompatActivity() {
     // Do not initialize yet

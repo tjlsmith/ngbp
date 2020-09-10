@@ -1,6 +1,7 @@
 package com.example.ngbp
 
 import android.graphics.Color
+import android.graphics.Color.RED
 import android.graphics.Color.WHITE
 import android.widget.ImageButton
 
@@ -21,7 +22,7 @@ fun mainGamePlay(
     val ngboElement = ngbspStateBoard.get(btnIndex)
     var dummy = 0
     // android.graphics.Color.WHITE
-    if (ngboElement != WATER) { // already selected
+    if (ngboElement != CLOUD) { // already selected
         return
     }
     if (ngbpBoard.get(btnIndex) == WATER) {
@@ -31,9 +32,11 @@ fun mainGamePlay(
         ngbspStateBoard.set(btnIndex, 1) // cant reclick
         //ngbpBoard.set(btnIndex, 0) // water
         dummy = 0
-    } else  {
+    } else {
         // hit!
-
+        btn.setBackgroundColor(RED)
+        btn.isClickable = false // can't reclick a square
+        ngbspStateBoard.set(btnIndex, 1) // cant reclick
     }
     val pdf = makePdf(khb, shipList)
     val move = selectMove(pdf)
