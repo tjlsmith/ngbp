@@ -6,20 +6,22 @@ fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray {
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
     var list = mutableListOf<Int>()
     for (ship in shipList) { // do this ship
-        val shipLen = ship.length
-        for (row in 0..9) {
-            for (col in 0..9) { // do this square
-                if (khb[row * 10 + col] == -1) { // only proceed if this might have a ship on it
-                    for (vd in 0..7) { // vector direction
-                        //var listt = mutableListOf<Int>() // empty list of new squares
-                        val vdRow = vectors[2 * vd]
-                        val vdCol = vectors[2 * vd + 1]
-                        //var good = true
-                        var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, khb)
-                        if (good) {
-                            for (i in 0..(listtt.size / 2) - 1) {
-                                val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
-                                pdfBoard[index]++
+        if (ship.floating) {
+            val shipLen = ship.length
+            for (row in 0..9) {
+                for (col in 0..9) { // do this square
+                    if (khb[row * 10 + col] == -1) { // only proceed if this might have a ship on it
+                        for (vd in 0..7) { // vector direction
+                            //var listt = mutableListOf<Int>() // empty list of new squares
+                            val vdRow = vectors[2 * vd]
+                            val vdCol = vectors[2 * vd + 1]
+                            //var good = true
+                            var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, khb)
+                            if (good) {
+                                for (i in 0..(listtt.size / 2) - 1) {
+                                    val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
+                                    pdfBoard[index]++
+                                }
                             }
                         }
                     }

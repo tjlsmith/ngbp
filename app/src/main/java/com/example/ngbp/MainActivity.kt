@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
-data class ship(val name: String, val length: Int)
+data class ship(val name: String, val length: Int, var floating: Boolean)
 data class initVals(
     var ngbpBoard: IntArray,
     val shipList: Array<*>
@@ -16,11 +16,11 @@ const val CLOUD = -1
 const val FIRE = 2
 
 var shipList = arrayOf<ship>(
-    ship("Aircraft Carrier", 6),
-    ship("BattleShip", 5),
-    ship("Destroyer", 4),
-    ship("Cruiser", 3),
-    ship("Submarine", 2)
+    ship("Aircraft Carrier", 6, true),
+    ship("BattleShip", 5, true),
+    ship("Destroyer", 4, true),
+    ship("Cruiser", 3, true),
+    ship("Submarine", 2, true)
 )
 var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
 
@@ -28,10 +28,11 @@ class MainActivity : AppCompatActivity() {
     // Do not initialize yet
     // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
     private lateinit var ngbpBoard: IntArray
+    private lateinit var unKnownHumanBoard: IntArray
     //private lateinit var shipList: Array<ship>
 
-    var unKnownHumanBoard = IntArray(100) { WATER }
-    var knownHumanBoard = IntArray(100) { CLOUD }
+    //var unKnownHumanBoard = IntArray(100) { WATER } // actual human ship layout
+    var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
 
     //(ngbpBoard, shipList) = com.example.ngbp.initTheGame()
     //lateinit var ngbpBoard = IntArray(100) { WATER }
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         //val ngbpBoard = initTheGame()
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
+        this.unKnownHumanBoard = makeNGBPBoard()
         // this.shipList = shipList
     }
 
