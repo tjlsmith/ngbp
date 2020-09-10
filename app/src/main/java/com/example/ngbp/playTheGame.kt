@@ -31,7 +31,9 @@ fun mainGamePlay(
         ngbspStateBoard.set(btnIndex, 1) // cant reclick
         //ngbpBoard.set(btnIndex, 0) // water
         dummy = 0
-    } else {
+    } else  {
+        // hit!
+
     }
     val pdf = makePdf(khb, shipList)
     val move = selectMove(pdf)

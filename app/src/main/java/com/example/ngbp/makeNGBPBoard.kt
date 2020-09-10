@@ -20,8 +20,8 @@ fun makeNGBPBoard(): IntArray {
                         placed = true
                         for (i in 0..(placeList.size / 2) - 1) {
                             val index = placeList[2 * i] * 10 + placeList[2 * i + 1]
-                            if (ngbpBoard[index]!=CLOUD){
-                                var dummy=1
+                            if (ngbpBoard[index] != CLOUD) {
+                                var dummy = 1
                             }
                             ngbpBoard[index] = shipLen
                         }
@@ -32,6 +32,11 @@ fun makeNGBPBoard(): IntArray {
             if (placed) {
                 break
             }
+        }
+    }
+    for (ind in 0..99) {
+        if (ngbpBoard[ind] == CLOUD) {
+            ngbpBoard[ind] = WATER
         }
     }
     return ngbpBoard
