@@ -3,7 +3,9 @@ package com.example.ngbp
 import android.graphics.Color
 import android.graphics.Color.RED
 import android.graphics.Color.WHITE
+import android.widget.GridLayout
 import android.widget.ImageButton
+import androidx.core.view.get
 
 // Array(10){IntArray(10)}
 // Array<*>
@@ -15,6 +17,7 @@ fun mainGamePlay(
     khb: IntArray,
     ukhb: IntArray,
     ngbpBoard: IntArray,
+    humanGrid: androidx.gridlayout.widget.GridLayout,
     //shipList: Array<ship>
 ) {
     // human move shelling ngbp board
@@ -43,5 +46,6 @@ fun mainGamePlay(
     // select the move from the pdf
     val move = selectMove(pdf)
     // play the move
-
+    var hbtn=humanGrid.get(move)
+    dummy=0
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 data class ship(val name: String, val length: Int, var floating: Boolean)
 data class initVals(
@@ -27,6 +28,7 @@ var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its but
 class MainActivity : AppCompatActivity() {
     // Do not initialize yet
     // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
+    // C:\Users\Terry\Pictures\Screenshots\Screenshot (528) passing arrays in Kotlin stackoverflow.png
     private lateinit var ngbpBoard: IntArray
     private lateinit var unKnownHumanBoard: IntArray
     //private lateinit var shipList: Array<ship>
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             col = tag % 10
         }
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
-        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard)
+        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v.Human)
         val dummy = 1
         //val col = imgBtn.name
         //val row = imgBtn.NGBP.rowCount
