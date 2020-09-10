@@ -24,7 +24,7 @@ fun mainGamePlay(
     if (ngboElement != WATER) { // already selected
         return
     }
-    if (ngbpBoard.get(btnIndex) == 0) {
+    if (ngbpBoard.get(btnIndex) == WATER) {
         // water
         btn.setBackgroundColor(android.graphics.Color.BLUE)
         btn.isClickable = false // can't reclick a square

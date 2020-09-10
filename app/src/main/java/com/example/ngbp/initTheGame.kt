@@ -33,6 +33,19 @@ fun initTheGame(): initVals {
     var ngbpPoint = points
 
     var ngbpBoard = makeNGBPBoard() // put ships on computers board
+    var best = rating(ngbpBoard)
+    for (i in 0..1000) {
+        var newB = makeNGBPBoard()
+        var newRating = rating(newB)
+        if (newRating < best) {
+            best = newRating
+            ngbpBoard = newB
+        }
+        if (best == 0){
+            break
+        }
+    }
+
 
     val retVal =
         initVals(ngbpBoard, shipList)
