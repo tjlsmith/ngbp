@@ -6,6 +6,9 @@ import android.graphics.Color.WHITE
 import android.widget.GridLayout
 import android.widget.ImageButton
 import androidx.core.view.get
+//import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.activity_main.view.HumanGrid
+
 
 // Array(10){IntArray(10)}
 // Array<*>
@@ -17,16 +20,16 @@ fun mainGamePlay(
     khb: IntArray,
     ukhb: IntArray,
     ngbpBoard: IntArray,
-    humanGrid: androidx.gridlayout.widget.GridLayout,
+    //v: Button?
     //shipList: Array<ship>
-) {
+):Int {
     // human move shelling ngbp board
     val btnIndex = 10 * row + col // 1 d array
     val ngboElement = ngbspStateBoard.get(btnIndex)
     var dummy = 0
     // android.graphics.Color.WHITE
     if (ngboElement != CLOUD) { // already selected
-        return
+        return -1
     }
     if (ngbpBoard.get(btnIndex) == WATER) {
         // water
@@ -45,7 +48,5 @@ fun mainGamePlay(
     val pdf = makePdf(khb, shipList)
     // select the move from the pdf
     val move = selectMove(pdf)
-    // play the move
-    var hbtn=humanGrid.get(move)
-    dummy=0
+    return move
 }

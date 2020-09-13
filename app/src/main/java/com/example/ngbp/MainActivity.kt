@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+
+// import kotlinx.android.synthetic.main.layout.view.*
 
 data class ship(val name: String, val length: Int, var floating: Boolean)
 data class initVals(
@@ -68,10 +72,17 @@ class MainActivity : AppCompatActivity() {
             col = tag % 10
         }
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
-        mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v.Human)
-        val dummy = 1
-        //val col = imgBtn.name
-        //val row = imgBtn.NGBP.rowCount
+        //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
+        val rowcol = mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard)
+        // play the move
+        if (rowcol >= 0) {
+            var hbtn = HumanGrid.get(rowcol) as ImageButton
+            // val hImgBtn = ("imageButtonH"+Integer.toString(move)) as ImageButton
+            // dummy = 0
+            val dummy = 1
+            //val col = imgBtn.name
+            //val row = imgBtn.NGBP.rowCount
+        }
     }
 
 }
