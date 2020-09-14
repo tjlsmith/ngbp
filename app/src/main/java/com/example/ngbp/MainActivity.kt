@@ -8,6 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
+import java.sql.Time
+import java.time.Instant
+import java.time.Instant.now
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
+import java.time.LocalTime.now
+import java.util.*
+import kotlin.concurrent.schedule
 
 // import kotlinx.android.synthetic.main.layout.view.*
 
@@ -61,6 +69,18 @@ class MainActivity : AppCompatActivity() {
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
         this.unKnownHumanBoard = makeNGBPBoard() // initilize human board
+        var best = rating(this.unKnownHumanBoard)
+        for (i in 0..100) {
+            var newB = makeNGBPBoard()
+            var newRating = rating(newB)
+            if (newRating < best) {
+                best = newRating
+                this.unKnownHumanBoard = newB
+            }
+            if (best == 0){
+                break
+            }
+        }
         drawHumanBoard(unKnownHumanBoard, HumanGrid)
         val dummy = 1
         // this.shipList = shipList
@@ -89,12 +109,28 @@ class MainActivity : AppCompatActivity() {
             unKnownHumanBoard,
             ngbpBoard
         )
+        v.invalidate()
+        // wait for 1 second
+        //Timer().schedule(1000) {
+        //}
+        //Instant instant = Instant.now()
+        //while (true){
+        //    Instant.now()-instant
+        //}
+        //do something
         // play the computer move
-        if (itWasAHit) {
+
+        // wait one second
+        //val now = LocalDateTime.now().second
+        //while (LocalDateTime.now().second == now) {
+        //}
+
+        if (itWasAHit) { // change computer score if nesessery
             var cScore = NGBPScore.text.toString().toInt()
             cScore -= 1 // loses a point in the hit
             NGBPScore.setText(cScore.toString())
         }
+
         if (rowCol >= 0) {
             var hBtn =
                 HumanGrid.get(rowCol) as ImageButton // set human board element colour based on result
@@ -108,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                 HumanScore.setText(hScore.toString())
                 knownHumanBoard[rowCol] = FIRE
             }
+            //v.invalidate()
             // val hImgBtn = ("imageButtonH"+Integer.toString(move)) as ImageButton
             // dummy = 0
             val dummy = 1

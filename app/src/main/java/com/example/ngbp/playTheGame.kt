@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.view.NGBPPoints
 import kotlinx.android.synthetic.main.activity_main.view.HumanGrid
+import java.time.LocalDateTime
 
 
 // Array(10){IntArray(10)}
@@ -30,7 +31,7 @@ fun mainGamePlay(
     var wasAHit = false
     // android.graphics.Color.WHITE
     if (ngboElement != CLOUD) { // already selected
-        return Result(-1,false)
+        return Result(-1, false)
     }
     if (ngbpBoard.get(btnIndex) == WATER) {
         // water
@@ -50,6 +51,6 @@ fun mainGamePlay(
     val pdf = makePdf(khb, shipList)
     // select the move from the pdf
     val move = selectMove(pdf)
-    val r = Result(move,wasAHit)
+    val r = Result(move, wasAHit)
     return r
 }
