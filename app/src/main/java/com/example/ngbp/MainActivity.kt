@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
-        val (rowCol, wasAHit) = mainGamePlay(
+        val (rowCol, itWasAHit) = mainGamePlay(
             row,
             col,
             imgBtn,
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             ngbpBoard
         )
         // play the computer move
-        if (wasAHit) {
+        if (itWasAHit) {
             var cScore = NGBPScore.text.toString().toInt()
             cScore -= 1 // loses a point in the hit
             NGBPScore.setText(cScore.toString())
