@@ -1,5 +1,6 @@
 package com.example.ngbp
 
+import android.bluetooth.BluetoothSocket
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -73,10 +74,17 @@ class MainActivity : AppCompatActivity() {
         }
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
-        val rowcol = mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard)
+        val rowCol = mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard)
         // play the move
-        if (rowcol >= 0) {
-            var hbtn = HumanGrid.get(rowcol) as ImageButton
+        if (rowCol >= 0) {
+            var hBtn = HumanGrid.get(rowCol) as ImageButton
+            if (unKnownHumanBoard[rowCol] == WATER) {
+                hBtn.setBackgroundColor(android.graphics.Color.BLUE)
+                knownHumanBoard[rowCol] = WATER
+            } else {
+                hBtn.setBackgroundColor(android.graphics.Color.RED) // hit a ship!
+                knownHumanBoard[rowCol] = FIRE
+            }
             // val hImgBtn = ("imageButtonH"+Integer.toString(move)) as ImageButton
             // dummy = 0
             val dummy = 1
