@@ -12,7 +12,7 @@ fun makeNGBPBoard(): IntArray {
             val col = (0..9).random()
             var placed = false
             if (ngbpBoard[row * 10 + col] == -1) { // only proceed if this square is empty
-                for (vd in 0..7) { // vector direction
+                for (vd in 0..7) { // vector direction - note that this biases the ship distribution - must make random
                     val vdRow = vectors[2 * vd]
                     val vdCol = vectors[2 * vd + 1]
                     var (good, placeList) = check(shipLen, row, col, vdRow, vdCol, ngbpBoard)

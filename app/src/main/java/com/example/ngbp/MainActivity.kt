@@ -115,5 +115,4 @@ class MainActivity : AppCompatActivity() {
             //val row = imgBtn.NGBP.rowCount
         }
     }
-
 }
