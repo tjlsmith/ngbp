@@ -60,7 +60,9 @@ class MainActivity : AppCompatActivity() {
         //val ngbpBoard = initTheGame()
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
-        this.unKnownHumanBoard = makeNGBPBoard()
+        this.unKnownHumanBoard = makeNGBPBoard() // initilize human board
+        drawHumanBoard(unKnownHumanBoard, HumanGrid)
+        val dummy = 1
         // this.shipList = shipList
     }
 
@@ -94,7 +96,8 @@ class MainActivity : AppCompatActivity() {
             NGBPScore.setText(cScore.toString())
         }
         if (rowCol >= 0) {
-            var hBtn = HumanGrid.get(rowCol) as ImageButton
+            var hBtn =
+                HumanGrid.get(rowCol) as ImageButton // set human board element colour based on result
             if (unKnownHumanBoard[rowCol] == WATER) {
                 hBtn.setBackgroundColor(android.graphics.Color.BLUE)
                 knownHumanBoard[rowCol] = WATER
