@@ -115,9 +115,10 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
+        val hMove = tag
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
-        val (rowCol, itWasAHit) = mainGamePlay(
+        val (cMove, itWasAHit) = mainGamePlay(
             row,
             col,
             imgBtn,
@@ -143,24 +144,42 @@ class MainActivity : AppCompatActivity() {
         //while (LocalDateTime.now().second == now) {
         //}
 
-        if (itWasAHit) { // change computer score if nesessery
+        if (itWasAHit) { // change computer score if necessary
             var cScore = NGBPScore.text.toString().toInt()
             cScore -= 1 // loses a point in the hit
             NGBPScore.setText(cScore.toString())
+            val mapp = intArrayOf(0, 0, 4, 3, 2, 1, 0)
+            val shipN = mapp[ngbpBoard[hMove]]
+            for ((i, el) in computerShipList[shipN].location.withIndex()) {
+                if (el == hMove) {
+                    computerShipList[shipN].location[i] = 0
+                    break
+                }
+            }
+            var count = 0
+            for ((i, el) in computerShipList[shipN].location.withIndex()) {
+                if (el > 0) {
+                    count++
+                    break // check for any elements left - if so, not sunk - break
+                }
+            }
+            if (count == 0) {
+                computerShipList[shipN].floating = false
+            }
         }
 
-        if (rowCol >= 0) {
+        if (cMove >= 0) {
             var hBtn =
-                HumanGrid.get(rowCol) as ImageButton // set human board element colour based on result
-            if (unKnownHumanBoard[rowCol] == WATER) {
+                HumanGrid.get(cMove) as ImageButton // set human board element colour based on result
+            if (unKnownHumanBoard[cMove] == WATER) {
                 hBtn.setBackgroundColor(android.graphics.Color.BLUE)
-                knownHumanBoard[rowCol] = WATER
+                knownHumanBoard[cMove] = WATER
             } else {
                 hBtn.setBackgroundColor(android.graphics.Color.RED) // hit a ship!
                 var hScore = HumanScore.text.toString().toInt()
                 hScore -= 1 // loses a point in the hit
                 HumanScore.setText(hScore.toString())
-                knownHumanBoard[rowCol] = FIRE
+                knownHumanBoard[cMove] = FIRE
             }
             //v.invalidate()
             // val hImgBtn = ("imageButtonH"+Integer.toString(move)) as ImageButton
