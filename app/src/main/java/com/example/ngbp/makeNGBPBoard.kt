@@ -1,6 +1,6 @@
 package com.example.ngbp
 
-fun makeNGBPBoard(): IntArray {
+fun makeNGBPBoard(shipList: Array<ship> ): IntArray {
     // return ngbp's board with all ships positioned
     var ngbpBoard = IntArray(100) { CLOUD } // must be to make check work
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)

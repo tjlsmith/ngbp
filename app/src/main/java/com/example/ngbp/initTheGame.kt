@@ -1,6 +1,7 @@
 package com.example.ngbp
 
-fun initTheGame(): initVals {
+//fun initTheGame(): initVals {
+fun initTheGame(): IntArray {
 
     // actual position of ships on human board
     // var unKnownHumanBoard = Array(10) { IntArray(10) }
@@ -12,6 +13,7 @@ fun initTheGame(): initVals {
     //var ngbpBoard = IntArray(100) { 0 }
 
     // return available enemy ship list
+
     /*
     var shipList = arrayOf<ship>(
         ship("Aircraft Carrier", 6),
@@ -20,22 +22,24 @@ fun initTheGame(): initVals {
         ship("Cruiser", 3),
         ship("Submarine", 2)
     )
-     */
+
     var points = 0
     for (ship in shipList) {
         points += ship.length
     }
+    */
+
 
     // https://lawcomic.net/guide/?p=864
 
     // return points for each player -> 20 in the default configuration
-    var humanPoint = points
-    var ngbpPoint = points
+    var humanPoint = 20 // points
+    var ngbpPoint = 20 // points
 
-    var ngbpBoard = makeNGBPBoard() // put ships on computers board
+    var ngbpBoard = makeNGBPBoard(humanShipList) // put ships on computers board
     var best = rating(ngbpBoard)
     for (i in 0..1000) {
-        var newB = makeNGBPBoard()
+        var newB = makeNGBPBoard(humanShipList)
         var newRating = rating(newB)
         if (newRating < best) {
             best = newRating
@@ -47,10 +51,9 @@ fun initTheGame(): initVals {
     }
 
 
-    val retVal =
-        initVals(ngbpBoard, shipList)
+    //val retVal = initVals(ngbpBoard, shipList)
 
-    return retVal
+    return ngbpBoard
 }
 
 /*

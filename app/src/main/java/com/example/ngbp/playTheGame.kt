@@ -17,10 +17,12 @@ import java.time.LocalDateTime
 fun mainGamePlay(
     row: Int,
     col: Int,
-    btn: ImageButton,
+    cBtn: ImageButton,
     khb: IntArray,
     ukhb: IntArray,
     ngbpBoard: IntArray,
+    hsl: Array<ship>,
+    csl: Array<ship>
     //v: Button?
     //shipList: Array<ship>
 ): Result {
@@ -35,20 +37,20 @@ fun mainGamePlay(
     }
     if (ngbpBoard.get(btnIndex) == WATER) {
         // water
-        btn.setBackgroundColor(android.graphics.Color.BLUE)
-        btn.isClickable = false // can't reclick a square
+        cBtn.setBackgroundColor(android.graphics.Color.BLUE)
+        cBtn.isClickable = false // can't reclick a square
         ngbspStateBoard.set(btnIndex, WATER) // cant reclick
         //ngbpBoard.set(btnIndex, 0) // water
         dummy = 0
     } else {
         // hit!
         wasAHit = true
-        btn.setBackgroundColor(RED)
-        btn.isClickable = false // can't reclick a square
+        cBtn.setBackgroundColor(RED)
+        cBtn.isClickable = false // can't reclick a square
         ngbspStateBoard.set(btnIndex, FIRE) // cant reclick
     }
     // build pdf for computer move selection
-    val pdf = makePdf(khb, shipList)
+    val pdf = makePdf(khb, hsl)
     // select the move from the pdf
     val move = selectMove(pdf)
     val r = Result(move, wasAHit)

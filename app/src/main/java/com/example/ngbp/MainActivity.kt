@@ -19,7 +19,13 @@ import kotlin.concurrent.schedule
 
 // import kotlinx.android.synthetic.main.layout.view.*
 
-data class ship(val name: String, val length: Int, var floating: Boolean)
+data class ship(
+    val name: String,
+    val length: Int,
+    var floating: Boolean,
+    var location: IntArray
+)
+
 data class initVals(
     var ngbpBoard: IntArray,
     val shipList: Array<*>
@@ -34,12 +40,20 @@ const val WATER = 0
 const val CLOUD = -1
 const val FIRE = 2
 
-var shipList = arrayOf<ship>(
-    ship("Aircraft Carrier", 6, true),
-    ship("BattleShip", 5, true),
-    ship("Destroyer", 4, true),
-    ship("Cruiser", 3, true),
-    ship("Submarine", 2, true)
+var humanShipList = arrayOf<ship>(
+    ship("Aircraft Carrier", 6, true, IntArray(6)),
+    ship("BattleShip", 5, true, IntArray(6)),
+    ship("Destroyer", 4, true, IntArray(6)),
+    ship("Cruiser", 3, true, IntArray(6)),
+    ship("Submarine", 2, true, IntArray(6))
+)
+
+var computerShipList = arrayOf<ship>(
+    ship("Aircraft Carrier", 6, true, IntArray(6)),
+    ship("BattleShip", 5, true, IntArray(6)),
+    ship("Destroyer", 4, true, IntArray(6)),
+    ship("Cruiser", 3, true, IntArray(6)),
+    ship("Submarine", 2, true, IntArray(6))
 )
 var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
 
@@ -64,23 +78,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val (ngbpBoard, shipList) = initTheGame()
-        //val ngbpBoard = initTheGame()
+        //val (ngbpBoard, shipList) = initTheGame()
+        val ngbpBoard = initTheGame()
+        computerShipList = makeShipList(ngbpBoard, computerShipList)
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
-        this.unKnownHumanBoard = makeNGBPBoard() // initilize human board
+        this.unKnownHumanBoard = makeNGBPBoard(humanShipList) // initilize human board
         var best = rating(this.unKnownHumanBoard)
         for (i in 0..100) {
-            var newB = makeNGBPBoard()
+            var newB = makeNGBPBoard(humanShipList)
             var newRating = rating(newB)
             if (newRating < best) {
                 best = newRating
                 this.unKnownHumanBoard = newB
             }
-            if (best == 0){
+            if (best == 0) {
                 break
             }
         }
+        humanShipList = makeShipList(unKnownHumanBoard, humanShipList)
         drawHumanBoard(unKnownHumanBoard, HumanGrid)
         val dummy = 1
         // this.shipList = shipList
@@ -107,7 +123,9 @@ class MainActivity : AppCompatActivity() {
             imgBtn,
             knownHumanBoard,
             unKnownHumanBoard,
-            ngbpBoard
+            ngbpBoard,
+            humanShipList,
+            computerShipList
         )
         v.invalidate()
         // wait for 1 second
