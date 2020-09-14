@@ -6,7 +6,7 @@ import android.graphics.Color.WHITE
 import android.widget.GridLayout
 import android.widget.ImageButton
 import androidx.core.view.get
-//import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.activity_main.view.NGBPPoints
 import kotlinx.android.synthetic.main.activity_main.view.HumanGrid
 
 
@@ -22,14 +22,15 @@ fun mainGamePlay(
     ngbpBoard: IntArray,
     //v: Button?
     //shipList: Array<ship>
-):Int {
+): Result {
     // human move shelling ngbp board
     val btnIndex = 10 * row + col // 1 d array
     val ngboElement = ngbspStateBoard.get(btnIndex)
     var dummy = 0
+    var wasAHit = false
     // android.graphics.Color.WHITE
     if (ngboElement != CLOUD) { // already selected
-        return -1
+        return Result(-1,false)
     }
     if (ngbpBoard.get(btnIndex) == WATER) {
         // water
@@ -40,6 +41,7 @@ fun mainGamePlay(
         dummy = 0
     } else {
         // hit!
+        wasAHit = true
         btn.setBackgroundColor(RED)
         btn.isClickable = false // can't reclick a square
         ngbspStateBoard.set(btnIndex, FIRE) // cant reclick
@@ -48,5 +50,6 @@ fun mainGamePlay(
     val pdf = makePdf(khb, shipList)
     // select the move from the pdf
     val move = selectMove(pdf)
-    return move
+    val r = Result(move,wasAHit)
+    return r
 }

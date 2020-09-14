@@ -17,6 +17,11 @@ data class initVals(
     val shipList: Array<*>
 )
 
+data class Result(
+    var move: Int,
+    val hit: Boolean
+)
+
 const val WATER = 0
 const val CLOUD = -1
 const val FIRE = 2
@@ -74,8 +79,20 @@ class MainActivity : AppCompatActivity() {
         }
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
-        val rowCol = mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard)
-        // play the move
+        val (rowCol, wasAHit) = mainGamePlay(
+            row,
+            col,
+            imgBtn,
+            knownHumanBoard,
+            unKnownHumanBoard,
+            ngbpBoard
+        )
+        // play the computer move
+        if (wasAHit) {
+            var cScore = NGBPScore.text.toString().toInt()
+            cScore -= 1 // loses a point in the hit
+            NGBPScore.setText(cScore.toString())
+        }
         if (rowCol >= 0) {
             var hBtn = HumanGrid.get(rowCol) as ImageButton
             if (unKnownHumanBoard[rowCol] == WATER) {
@@ -83,6 +100,9 @@ class MainActivity : AppCompatActivity() {
                 knownHumanBoard[rowCol] = WATER
             } else {
                 hBtn.setBackgroundColor(android.graphics.Color.RED) // hit a ship!
+                var hScore = HumanScore.text.toString().toInt()
+                hScore -= 1 // loses a point in the hit
+                HumanScore.setText(hScore.toString())
                 knownHumanBoard[rowCol] = FIRE
             }
             // val hImgBtn = ("imageButtonH"+Integer.toString(move)) as ImageButton
