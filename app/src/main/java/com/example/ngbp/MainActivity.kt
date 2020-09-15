@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.solver.widgets.ConstraintWidget.VISIBLE
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -118,7 +119,8 @@ class MainActivity : AppCompatActivity() {
         val hMove = tag
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
-        val (cMove, itWasAHit) = mainGamePlay(
+        // human moved hMove - now computer returns 
+        val (cMove, humanMadeAHit) = mainGamePlay(
             row,
             col,
             imgBtn,
@@ -144,30 +146,11 @@ class MainActivity : AppCompatActivity() {
         //while (LocalDateTime.now().second == now) {
         //}
 
-        if (itWasAHit) { // change computer score if necessary
-            var cScore = NGBPScore.text.toString().toInt()
-            cScore -= 1 // loses a point in the hit
-            NGBPScore.setText(cScore.toString())
-            val mapp = intArrayOf(0, 0, 4, 3, 2, 1, 0)
-            val shipN = mapp[ngbpBoard[hMove]]
-            for ((i, el) in computerShipList[shipN].location.withIndex()) {
-                if (el == hMove) {
-                    computerShipList[shipN].location[i] = 0
-                    break
-                }
-            }
-            var count = 0
-            for ((i, el) in computerShipList[shipN].location.withIndex()) {
-                if (el > 0) {
-                    count++
-                    break // check for any elements left - if so, not sunk - break
-                }
-            }
-            if (count == 0) {
-                computerShipList[shipN].floating = false
-            }
+        if (humanMadeAHit) { // change computer score if necessary
+            var (NGBPScore, computerShipList) = hitUpDate(NGBPScore, hMove, ngbpBoard, computerShipList)
         }
 
+        // check here if computer made a hit
         if (cMove >= 0) {
             var hBtn =
                 HumanGrid.get(cMove) as ImageButton // set human board element colour based on result
@@ -176,9 +159,11 @@ class MainActivity : AppCompatActivity() {
                 knownHumanBoard[cMove] = WATER
             } else {
                 hBtn.setBackgroundColor(android.graphics.Color.RED) // hit a ship!
-                var hScore = HumanScore.text.toString().toInt()
-                hScore -= 1 // loses a point in the hit
-                HumanScore.setText(hScore.toString())
+                var (HumanScore,HumanShipList)= hitUpDate(HumanScore,cMove,unKnownHumanBoard,
+                    humanShipList)
+                //var hScore = HumanScore.text.toString().toInt()
+                //hScore -= 1 // loses a point in the hit
+                //HumanScore.setText(hScore.toString())
                 knownHumanBoard[cMove] = FIRE
             }
             //v.invalidate()
