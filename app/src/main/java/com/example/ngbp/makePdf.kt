@@ -1,6 +1,6 @@
 package com.example.ngbp
 
-fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray {
+fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
     // return pdf of possible ships on human board
     var pdfBoard = IntArray(100) { WATER } // init to zero
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
@@ -24,6 +24,32 @@ fun makePdf(khb: IntArray, shipList: Array<ship>): IntArray {
                                 }
                             }
                         }
+                    }
+                }
+            } // row
+        }
+    }
+    return pdfBoard
+}
+
+fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntArray {
+    // return pdf of possible ships on human board on this one spot row col
+    var pdfBoard = IntArray(100) { WATER } // init to zero
+    val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
+    var list = mutableListOf<Int>()
+    for (ship in shipList) { // do this ship
+        if (ship.floating) {
+            val shipLen = ship.length
+            for (vd in 0..7) { // vector direction
+                //var listt = mutableListOf<Int>() // empty list of new squares
+                val vdRow = vectors[2 * vd]
+                val vdCol = vectors[2 * vd + 1]
+                //var good = true
+                var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, khb)
+                if (good) {
+                    for (i in 0..(listtt.size / 2) - 1) {
+                        val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
+                        pdfBoard[index]++
                     }
                 }
             }

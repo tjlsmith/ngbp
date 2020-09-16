@@ -50,7 +50,7 @@ fun mainGamePlay(
         ngbspStateBoard.set(btnIndex, FIRE) // cant reclick
     }
     // build pdf for computer move selection
-    val pdf = makePdf(khb, hsl)
+    val pdf = makePdfHunt(khb, hsl) // hunt not kill
     // select the move from the pdf
     val move = selectMove(pdf)
     val r = Result(move, wasAHit)
