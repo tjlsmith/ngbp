@@ -159,6 +159,11 @@ class MainActivity : AppCompatActivity() {
                 computerShipList
             )
         }
+        if (NGBPScore.text.toString().toInt()  == 0) {
+            val hAnno = hSunkAnnouncer // as TextView
+            hAnno.setText("Human Wins!")
+            hAnno.setVisibility(View.VISIBLE)
+        }
 
         // check here if computer made a hit
         if (cMove >= 0) {
@@ -183,6 +188,11 @@ class MainActivity : AppCompatActivity() {
                     HumanScore, cMove, unKnownHumanBoard,
                     humanShipList
                 )
+                if (HumanScore.text.toString().toInt()  == 0) {
+                    val cAnno = cSunkAnnouncer // as TextView
+                    cAnno.setText("NGBP Wins!")
+                    cAnno.setVisibility(View.VISIBLE)
+                }
                 //var hScore = HumanScore.text.toString().toInt()
                 //hScore -= 1 // loses a point in the hit
                 //HumanScore.setText(hScore.toString())
