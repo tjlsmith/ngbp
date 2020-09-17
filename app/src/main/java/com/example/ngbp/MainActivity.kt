@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity() {
                 computerShipList
             )
         }
-        if (NGBPScore.text.toString().toInt()  == 0) {
+        if (NGBPScore.text.toString().toInt() == 0) {
             val hAnno = hSunkAnnouncer // as TextView
             hAnno.setText("Human Wins!")
             hAnno.setVisibility(View.VISIBLE)
@@ -184,14 +184,26 @@ class MainActivity : AppCompatActivity() {
                     killCol = cMove % 10
                 }
                 hBtn.setBackgroundColor(android.graphics.Color.RED)
-                var (HumanScore, HumanShipList) = hitUpDate(
+
+                var (HumanScore, HumanShipList, shipSunk) = hitUpDate(
                     HumanScore, cMove, unKnownHumanBoard,
                     humanShipList
                 )
-                if (HumanScore.text.toString().toInt()  == 0) {
-                    val cAnno = cSunkAnnouncer // as TextView
+                val hAnno = hSunkAnnouncer // as TextView
+                hAnno.setVisibility(View.GONE)
+                val cAnno = cSunkAnnouncer // as TextView
+                cAnno.setVisibility(View.GONE)
+
+                if (HumanScore.text.toString().toInt() == 0) {
+                    // val cAnno = cSunkAnnouncer // as TextView
                     cAnno.setText("NGBP Wins!")
                     cAnno.setVisibility(View.VISIBLE)
+                } else {
+                    if (shipSunk.length != 0) {
+                        // val hAnno = hSunkAnnouncer // as TextView
+                        hAnno.setText("You sunk my " + shipSunk + "!")
+                        hAnno.setVisibility(View.VISIBLE)
+                    }
                 }
                 //var hScore = HumanScore.text.toString().toInt()
                 //hScore -= 1 // loses a point in the hit

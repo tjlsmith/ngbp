@@ -17,7 +17,8 @@ fun makeShipList(b: IntArray, shipList: Array<ship>): Array<ship> {
 
 data class newScore(
     var Score: TextView,
-    var shipList: Array<ship>
+    var shipList: Array<ship>,
+    var shipSunk: String
 )
 
 fun hitUpDate(Score: TextView, move: Int, board: IntArray, ShipList: Array<ship>): newScore {
@@ -39,12 +40,14 @@ fun hitUpDate(Score: TextView, move: Int, board: IntArray, ShipList: Array<ship>
             break // check for any elements left - if so, not sunk - break
         }
     }
+    var shipSunk = ""
     if (count == 0) {
         ShipList[shipN].floating = false // sunk if here!
         killmode = false // back to hunt mode
+        shipSunk = computerShipList[shipN].name
         //hSunkAnnouncer.setText("You sunk my " + computerShipList[shipN].name + "!")
         //hSunkAnnouncer.visibility(VISIBLE)
     }
-    val rT = newScore(Score, ShipList) // return modified datums!
+    val rT = newScore(Score, ShipList, shipSunk) // return modified datums!
     return rT
 }
