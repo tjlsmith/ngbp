@@ -58,6 +58,10 @@ var computerShipList = arrayOf<ship>(
 )
 var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
 
+var killmode = false
+var killRow = 0
+var killCol = 0
+
 class MainActivity : AppCompatActivity() {
     // Do not initialize yet
     // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
@@ -104,6 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun kaBoom(v: View?) {
+        // process human move
         // var button = findViewById<Button>(R.id.NGBP.)
         val imgBtn = findViewById(v!!.id) as ImageButton
         val tag = Integer.parseInt(v.getTag().toString()) //.toInt()
@@ -147,7 +152,12 @@ class MainActivity : AppCompatActivity() {
         //}
 
         if (humanMadeAHit) { // change computer score if necessary
-            var (NGBPScore, computerShipList) = hitUpDate(NGBPScore, hMove, ngbpBoard, computerShipList)
+            var (NGBPScore, computerShipList) = hitUpDate(
+                NGBPScore,
+                hMove,
+                ngbpBoard,
+                computerShipList
+            )
         }
 
         // check here if computer made a hit
@@ -158,9 +168,21 @@ class MainActivity : AppCompatActivity() {
                 hBtn.setBackgroundColor(android.graphics.Color.BLUE)
                 knownHumanBoard[cMove] = WATER
             } else {
-                hBtn.setBackgroundColor(android.graphics.Color.RED) // hit a ship!
-                var (HumanScore,HumanShipList)= hitUpDate(HumanScore,cMove,unKnownHumanBoard,
-                    humanShipList)
+                // computer hit a ship!
+                killmode = true
+                killRow = 0
+                killCol = 0
+                if (cMove < 10) {
+                    killCol = cMove
+                } else {
+                    killRow = cMove / 10
+                    killCol = cMove % 10
+                }
+                hBtn.setBackgroundColor(android.graphics.Color.RED)
+                var (HumanScore, HumanShipList) = hitUpDate(
+                    HumanScore, cMove, unKnownHumanBoard,
+                    humanShipList
+                )
                 //var hScore = HumanScore.text.toString().toInt()
                 //hScore -= 1 // loses a point in the hit
                 //HumanScore.setText(hScore.toString())

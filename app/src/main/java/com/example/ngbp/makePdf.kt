@@ -20,7 +20,7 @@ fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
                             if (good) {
                                 for (i in 0..(listtt.size / 2) - 1) {
                                     val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
-                                    pdfBoard[index]++
+                                    pdfBoard[index]+=shipLen
                                 }
                             }
                         }
@@ -44,15 +44,29 @@ fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntAr
                 //var listt = mutableListOf<Int>() // empty list of new squares
                 val vdRow = vectors[2 * vd]
                 val vdCol = vectors[2 * vd + 1]
-                //var good = true
+                // var good = true
                 var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, khb)
                 if (good) {
+                    var fireCount = 0
                     for (i in 0..(listtt.size / 2) - 1) {
                         val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
-                        pdfBoard[index]++
+                        if (khb[index] == FIRE) {
+                            fireCount++
+                        }
+                    }
+                    for (i in 0..(listtt.size / 2) - 1) {
+                        val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
+                        pdfBoard[index] += fireCount
                     }
                 }
             }
+        }
+    }
+    // zero actual hit point so it doesn't try and hit it again
+    pdfBoard[row * 10 + col] = 0
+    for ((i,el) in khb.withIndex()) {
+        if (el != CLOUD) {
+            pdfBoard[i] = 0
         }
     }
     return pdfBoard
@@ -73,10 +87,22 @@ fun check(
         val newRow = row + l * vdRow
         val newCol = col + l * vdCol
         val newIndex = newRow * 10 + newCol
-        if (newCol < 0 || newRow < 0 || newCol > 9 || newRow > 9 || (board[newIndex] != CLOUD)) {
-            good = false // must be in bounds and unknown
+        if (newCol < 0 || newRow < 0 || newCol > 9 || newRow > 9) {
+            good = false // must be in bounds
             break
+        } else {
+            // ok inbounds check contents of square
+            if (board[newIndex] != CLOUD) {
+                if (killmode && board[newIndex] == FIRE) {
+                    // exception for killmode
+                    val dummy = 0
+                } else {
+                    good = false // must be unknown unless killmode in which case fire is ok
+                    break
+                }
+            }
         }
+
         listt.add(newRow)
         listt.add(newCol)
     }

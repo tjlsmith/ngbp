@@ -41,9 +41,10 @@ fun hitUpDate(Score: TextView, move: Int, board: IntArray, ShipList: Array<ship>
     }
     if (count == 0) {
         ShipList[shipN].floating = false // sunk if here!
+        killmode = false // back to hunt mode
         //hSunkAnnouncer.setText("You sunk my " + computerShipList[shipN].name + "!")
         //hSunkAnnouncer.visibility(VISIBLE)
     }
-    val rT = newScore(Score, ShipList) // return modfied datums!
+    val rT = newScore(Score, ShipList) // return modified datums!
     return rT
 }
