@@ -122,6 +122,11 @@ class MainActivity : AppCompatActivity() {
             col = tag % 10
         }
         val hMove = tag
+        val hAnno = hSunkAnnouncer // as TextView
+        hAnno.setVisibility(View.GONE)
+        val cAnno = cSunkAnnouncer // as TextView
+        cAnno.setVisibility(View.GONE)
+
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
         // human moved hMove - now computer returns 
@@ -152,12 +157,16 @@ class MainActivity : AppCompatActivity() {
         //}
 
         if (humanMadeAHit) { // change computer score if necessary
-            var (NGBPScore, computerShipList) = hitUpDate(
+            var (NGBPScore, computerShipList, shipSunk) = hitUpDate(
                 NGBPScore,
                 hMove,
                 ngbpBoard,
                 computerShipList
             )
+            if (shipSunk.length != 0) {
+                cAnno.setText("You sunk my " + shipSunk + "!")
+                cAnno.setVisibility(View.VISIBLE)
+            }
         }
         if (NGBPScore.text.toString().toInt() == 0) {
             val hAnno = hSunkAnnouncer // as TextView
@@ -189,11 +198,6 @@ class MainActivity : AppCompatActivity() {
                     HumanScore, cMove, unKnownHumanBoard,
                     humanShipList
                 )
-                val hAnno = hSunkAnnouncer // as TextView
-                hAnno.setVisibility(View.GONE)
-                val cAnno = cSunkAnnouncer // as TextView
-                cAnno.setVisibility(View.GONE)
-
                 if (HumanScore.text.toString().toInt() == 0) {
                     // val cAnno = cSunkAnnouncer // as TextView
                     cAnno.setText("NGBP Wins!")
