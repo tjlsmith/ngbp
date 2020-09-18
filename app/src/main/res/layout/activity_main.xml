@@ -2040,12 +2040,13 @@
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/gameBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:text="Nuts Good Battleship Program"
-        android:textSize="30sp"
+        android:text="Nuts Good Battleship Program V 0.001"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/HumanGrid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -2065,7 +2066,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/HumanGrid"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/gameBanner" />
 
     <TextView
         android:id="@+id/HPoints"
@@ -2077,7 +2078,7 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/gameBanner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NGBP"
         app:layout_constraintTop_toTopOf="parent" />
@@ -2119,7 +2120,7 @@
         android:textColor="#E91E63"
         android:textSize="36sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/gameBanner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -2127,7 +2128,8 @@
     <TextView
         android:id="@+id/cSunkAnnouncer"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
         android:layout_marginBottom="142dp"
         android:background="@android:color/black"
         android:text="You sunk my Battleship!"

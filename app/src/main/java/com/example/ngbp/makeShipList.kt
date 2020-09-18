@@ -51,3 +51,17 @@ fun hitUpDate(Score: TextView, move: Int, board: IntArray, ShipList: Array<ship>
     val rT = newScore(Score, ShipList, shipSunk) // return modified datums!
     return rT
 }
+
+fun findFire(b: IntArray): rowColTransfer {
+    var row = -1
+    var col = -1
+    for (i in 0..9) {
+        for (j in 0..9) {
+            val index = 10 * i + j
+            if (b[index] == FIRE) {
+                return com.example.ngbp.rowColTransfer(i, j)
+            }
+        }
+    }
+    return rowColTransfer(row, col)
+}

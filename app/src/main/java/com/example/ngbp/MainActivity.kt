@@ -32,6 +32,11 @@ data class initVals(
     val shipList: Array<*>
 )
 
+data class rowColTransfer(
+    var row: Int,
+    var col: Int
+)
+
 data class Result(
     var move: Int,
     val hit: Boolean
@@ -40,6 +45,7 @@ data class Result(
 const val WATER = 0
 const val CLOUD = -1
 const val FIRE = 2
+const val VERSION = 0.002
 
 var humanShipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6, true, IntArray(6)),
@@ -86,6 +92,8 @@ class MainActivity : AppCompatActivity() {
         //val (ngbpBoard, shipList) = initTheGame()
         val ngbpBoard = initTheGame()
         computerShipList = makeShipList(ngbpBoard, computerShipList)
+        val banner = gameBanner
+        banner.text = "Nuts Good BattleSHip Program V." + VERSION
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
         this.unKnownHumanBoard = makeNGBPBoard(humanShipList) // initilize human board
@@ -129,7 +137,8 @@ class MainActivity : AppCompatActivity() {
 
         // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
         //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
-        // human moved hMove - now computer returns 
+
+        // human moved hMove - now computer returns
         val (cMove, humanMadeAHit) = mainGamePlay(
             row,
             col,

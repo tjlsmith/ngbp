@@ -51,6 +51,11 @@ fun mainGamePlay(
     }
     // build pdf for computer move selection
     var pdf = IntArray(100)
+    var (killRow, killCol) = findFire(khb) // is there anything on fire on the human board?
+    killmode = true
+    if (killRow == -1 || killCol == -1) {
+        killmode = false
+    }
     if (killmode) { // check if COMPUTER made a hit!
         pdf = makePdfKill(khb, hsl, killRow, killCol) // kill not hunt
     } else {
