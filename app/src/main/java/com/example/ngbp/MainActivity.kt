@@ -45,7 +45,8 @@ data class Result(
 const val WATER = 0
 const val CLOUD = -1
 const val FIRE = 2
-const val VERSION = 0.002
+const val SUNK = 3
+const val VERSION = 0.003
 
 var humanShipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6, true, IntArray(6)),
@@ -204,7 +205,7 @@ class MainActivity : AppCompatActivity() {
                 hBtn.setBackgroundColor(android.graphics.Color.RED)
 
                 var (HumanScore, HumanShipList, shipSunk) = hitUpDate(
-                    HumanScore, cMove, unKnownHumanBoard,
+                    HumanScore, cMove, knownHumanBoard,
                     humanShipList
                 )
                 if (HumanScore.text.toString().toInt() == 0) {
