@@ -7,6 +7,10 @@ fun rating(b: IntArray): Int {
     // lower score better
 
     var score = 0
+    // must NOT be in square zero
+    if (quilty(b, 0) > 0) {
+        return 1000000
+    }
     var i = 44 // penilize middle squares
     score += quilty(b, i)
     i = 45

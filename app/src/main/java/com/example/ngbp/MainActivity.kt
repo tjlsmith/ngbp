@@ -42,11 +42,14 @@ data class Result(
     val hit: Boolean
 )
 
-const val WATER = 0
+const val VERSION = 0.010
 const val CLOUD = -1
-const val FIRE = 2
-const val SUNK = 3
-const val VERSION = 0.003
+const val WATER = 0
+
+// ships take 2-6
+const val FIRE = 7
+const val SUNK = 8
+const val UNUSED = 100
 
 var humanShipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6, true, IntArray(6)),
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
     // C:\Users\Terry\Pictures\Screenshots\Screenshot (528) passing arrays in Kotlin stackoverflow.png
     private lateinit var ngbpBoard: IntArray
-    private lateinit var unKnownHumanBoard: IntArray
+    private lateinit var unKnownHumanBoard: IntArray // the actual state of the human board
     //private lateinit var shipList: Array<ship>
 
     //var unKnownHumanBoard = IntArray(100) { WATER } // actual human ship layout
@@ -167,9 +170,10 @@ class MainActivity : AppCompatActivity() {
         //}
 
         if (humanMadeAHit) { // change computer score if necessary
-            var (NGBPScore, computerShipList, shipSunk) = hitUpDate(
+            var (NGBPScore, computerShipList, shipSunk, ngbpBoard) = hitUpDate(
                 NGBPScore,
                 hMove,
+                ngbpBoard,
                 ngbpBoard,
                 computerShipList
             )
@@ -193,7 +197,7 @@ class MainActivity : AppCompatActivity() {
                 knownHumanBoard[cMove] = WATER
             } else {
                 // computer hit a ship!
-                killmode = true
+                //killmode = true
                 killRow = 0
                 killCol = 0
                 if (cMove < 10) {
@@ -204,8 +208,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 hBtn.setBackgroundColor(android.graphics.Color.RED)
 
-                var (HumanScore, HumanShipList, shipSunk) = hitUpDate(
-                    HumanScore, cMove, knownHumanBoard,
+                var (HumanScore, HumanShipList, shipSunk, knownHumanBoard) = hitUpDate(
+                    HumanScore, cMove, unKnownHumanBoard, knownHumanBoard,
                     humanShipList
                 )
                 if (HumanScore.text.toString().toInt() == 0) {

@@ -1,19 +1,32 @@
 package com.example.ngbp
 
+import android.icu.text.RelativeDateTimeFormatter
 import android.widget.TextView
 
 data class newScore(
     var Score: TextView,
     var shipList: Array<ship>,
-    var shipSunk: String
+    var shipSunk: String,
+    var knownBoard: IntArray
 )
 
-fun hitUpDate(Score: TextView, move: Int, board: IntArray, ShipList: Array<ship>): newScore {
+fun hitUpDate(
+    Score: TextView,
+    move: Int,
+    unKnownBoard: IntArray,
+    knownBoard: IntArray,
+    ShipList: Array<ship>
+): newScore {
     var cScore = Score.text.toString().toInt() // get score
     cScore -= 1 // loses a point in the hit // change score
     Score.setText(cScore.toString()) // set score
+    if (killmode) {
+        Score.setTextColor(android.graphics.Color.RED)
+    } else {
+        Score.setTextColor(android.graphics.Color.LTGRAY)
+    }
     val mapp = intArrayOf(0, 0, 4, 3, 2, 1, 0)
-    val shipN = mapp[board[move]] // prepare to change squares left for this ship
+    val shipN = mapp[unKnownBoard[move]] // prepare to change squares left for this ship
     for ((i, el) in ShipList[shipN].location.withIndex()) {
         if (el == move) {
             ShipList[shipN].location[i] =
@@ -32,13 +45,13 @@ fun hitUpDate(Score: TextView, move: Int, board: IntArray, ShipList: Array<ship>
     if (count == 0) {
         ShipList[shipN].floating = false // sunk if here!
         for (el in ShipList[shipN].location) {
-            board[-el] = SUNK
+            knownBoard[-el] = SUNK
         }
         killmode = false // back to hunt mode
         shipSunk = computerShipList[shipN].name
         //hSunkAnnouncer.setText("You sunk my " + computerShipList[shipN].name + "!")
         //hSunkAnnouncer.visibility(VISIBLE)
     }
-    val rT = newScore(Score, ShipList, shipSunk) // return modified datums!
+    val rT = newScore(Score, ShipList, shipSunk, knownBoard) // return modified datums!
     return rT
 }

@@ -10,6 +10,9 @@ fun makeShipList(b: IntArray, shipList: Array<ship>): Array<ship> {
         if (el > 1) {
             shipList[mapp[el]].location[pointer[el]] = i
             pointer[el]++
+            if (pointer[el] < 6) {
+                shipList[mapp[el]].location[pointer[el]] = UNUSED
+            }
         }
     }
     return shipList
