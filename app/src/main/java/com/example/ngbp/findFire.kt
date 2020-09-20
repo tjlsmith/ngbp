@@ -9,11 +9,15 @@ fun findFire(knownHumanBoard: IntArray): rowColTransfer {
         for (j in 0..9) {
             val index = 10 * i + j
             if (knownHumanBoard[index] == FIRE) {
+                row = i
+                col = j // return these IFF no better one
+                /*
                 for (dI in -1..1) {
                     for (dJ in -1..1) {
                         if (dI == 0 && dJ == 0) {
                             continue
                         }
+
                         val newI = i + dI
                         val newJ = j + dJ
                         val newBehindI = i - dI
@@ -24,9 +28,9 @@ fun findFire(knownHumanBoard: IntArray): rowColTransfer {
                             if (knownHumanBoard[newIndex] == CLOUD && knownHumanBoard[newBehindIndex] == FIRE) {
                                 return com.example.ngbp.rowColTransfer(i, j)
                             }
-                        }
-                    }
-                }
+                        }*/
+                //}
+                //}
             }
         }
     }

@@ -11,8 +11,10 @@ fun drawHumanBoard(unKnownHumanBoard: IntArray, HumanGrid: GridLayout) {
             HumanGrid.get(index) as ImageButton // set human board element colour based on result
         if (square == WATER) {
             hBtn.setBackgroundColor(android.graphics.Color.WHITE)
+            hBtn.tooltipText = "Cloud"
         } else {
             hBtn.setBackgroundColor(android.graphics.Color.LTGRAY)
+            hBtn.tooltipText = "Ship"
         }
     }
 }

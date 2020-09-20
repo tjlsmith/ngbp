@@ -36,7 +36,7 @@ fun hitUpDate(
     }
     var count = 0 // count squares left
     for ((i, el) in ShipList[shipN].location.withIndex()) {
-        if (el > 0) {
+        if (el > 0 && el != UNUSED) {
             count++
             break // check for any elements left - if so, not sunk - break
         }

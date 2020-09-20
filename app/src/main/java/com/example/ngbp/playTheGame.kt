@@ -38,6 +38,7 @@ fun mainGamePlay(
     if (ngbpBoard.get(btnIndex) == WATER) {
         // water
         cBtn.setBackgroundColor(android.graphics.Color.BLUE)
+        cBtn.tooltipText = "Water"
         cBtn.isClickable = false // can't reclick a square
         ngbspStateBoard.set(btnIndex, WATER) // cant reclick
         //ngbpBoard.set(btnIndex, 0) // water
@@ -46,6 +47,7 @@ fun mainGamePlay(
         // hit!
         wasAHit = true
         cBtn.setBackgroundColor(RED)
+        cBtn.tooltipText = "Fire"
         cBtn.isClickable = false // can't reclick a square
         ngbspStateBoard.set(btnIndex, FIRE) // cant reclick
     }

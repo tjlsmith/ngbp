@@ -42,7 +42,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.010
+const val VERSION = 0.016
 const val CLOUD = -1
 const val WATER = 0
 
@@ -194,6 +194,7 @@ class MainActivity : AppCompatActivity() {
                 HumanGrid.get(cMove) as ImageButton // set human board element colour based on result
             if (unKnownHumanBoard[cMove] == WATER) {
                 hBtn.setBackgroundColor(android.graphics.Color.BLUE)
+                hBtn.tooltipText = "Water"
                 knownHumanBoard[cMove] = WATER
             } else {
                 // computer hit a ship!
@@ -207,6 +208,7 @@ class MainActivity : AppCompatActivity() {
                     killCol = cMove % 10
                 }
                 hBtn.setBackgroundColor(android.graphics.Color.RED)
+                hBtn.tooltipText = "Fire"
 
                 var (HumanScore, HumanShipList, shipSunk, knownHumanBoard) = hitUpDate(
                     HumanScore, cMove, unKnownHumanBoard, knownHumanBoard,
