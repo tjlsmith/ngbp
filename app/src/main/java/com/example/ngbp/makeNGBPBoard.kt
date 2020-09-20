@@ -1,6 +1,6 @@
 package com.example.ngbp
 
-fun makeNGBPBoard(shipList: Array<ship> ): IntArray {
+fun makeNGBPBoard(shipList: Array<ship>): IntArray {
     // return ngbp's board with all ships positioned
     var ngbpBoard = IntArray(100) { CLOUD } // must be to make check work
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
@@ -17,7 +17,7 @@ fun makeNGBPBoard(shipList: Array<ship> ): IntArray {
                 for (vd in 0..7) { // vector direction - note that this biases the ship distribution - must make random
                     val vdRow = vectors[2 * vdi[vd]]
                     val vdCol = vectors[2 * vdi[vd] + 1]
-                    var (good, placeList) = check(shipLen, row, col, vdRow, vdCol, ngbpBoard)
+                    var (good, placeList) = check(shipLen, row, col, vdRow, vdCol, ngbpBoard, 0)
                     if (good) {
                         placed = true
                         for (i in 0..(placeList.size / 2) - 1) {

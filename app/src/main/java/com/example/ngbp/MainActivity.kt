@@ -42,7 +42,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.018
+const val VERSION = 0.020
 const val CLOUD = -1
 const val WATER = 0
 
@@ -67,6 +67,7 @@ var computerShipList = arrayOf<ship>(
     ship("Submarine", 2, true, IntArray(6))
 )
 var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
+var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
 
 var killmode = false
 var killRow = 0
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var shipList: Array<ship>
 
     //var unKnownHumanBoard = IntArray(100) { WATER } // actual human ship layout
-    var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
+    //var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
 
     //(ngbpBoard, shipList) = com.example.ngbp.initTheGame()
     //lateinit var ngbpBoard = IntArray(100) { WATER }

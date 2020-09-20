@@ -1,6 +1,7 @@
 package com.example.ngbp
 
-fun findFire(knownHumanBoard: IntArray): rowColTransfer {
+//fun findFire(knownHumanBoard: IntArray): rowColTransfer {
+fun findFire(): rowColTransfer {
     // must find fire with cloud next to it
 
     var row = -1
