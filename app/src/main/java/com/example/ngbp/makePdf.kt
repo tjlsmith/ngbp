@@ -1,6 +1,7 @@
 package com.example.ngbp
 
-fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
+//fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
+fun makePdfHunt(shipList: Array<ship>): IntArray {
     // return pdf of possible ships on human board
     // no offset needed here
     var pdfBoard = IntArray(100) { WATER } // init to zero
@@ -11,13 +12,13 @@ fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
             val shipLen = ship.length
             for (row in 0..9) {
                 for (col in 0..9) { // do this square
-                    if (khb[row * 10 + col] == CLOUD) { // only proceed if this might have a ship on it
+                    if (knownHumanBoard[row * 10 + col] == CLOUD) { // only proceed if this might have a ship on it
                         for (vd in 0..7) { // vector direction
                             //var listt = mutableListOf<Int>() // empty list of new squares
                             val vdRow = vectors[2 * vd]
                             val vdCol = vectors[2 * vd + 1]
                             //var good = true
-                            var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, khb, 0)
+                            var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, knownHumanBoard, 0)
                             if (good) {
                                 for (i in 0..(listtt.size / 2) - 1) {
                                     val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
@@ -33,7 +34,8 @@ fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
     return pdfBoard
 }
 
-fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntArray {
+//fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntArray {
+fun makePdfKill(shipList: Array<ship>, row: Int, col: Int): IntArray {
     // return pdf of possible ships on human board on this one spot row col
     // offset needed here
     var pdfBoard = IntArray(100) { WATER } // init to zero
@@ -49,12 +51,12 @@ fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntAr
                     val vdRow = vectors[2 * vd]
                     val vdCol = vectors[2 * vd + 1]
                     // var good = true
-                    var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, khb, offset)
+                    var (good, listtt) = check(shipLen, row, col, vdRow, vdCol, knownHumanBoard, offset)
                     if (good) {
                         var fireCount = 0
                         for (i in 0..(listtt.size / 2) - 1) {
                             val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
-                            if (khb[index] == FIRE) {
+                            if (knownHumanBoard[index] == FIRE) {
                                 fireCount++
                             }
                         }
@@ -72,7 +74,7 @@ fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntAr
     }
     // zero actual hit point so it doesn't try and hit it again
     pdfBoard[row * 10 + col] = 0
-    for ((i, el) in khb.withIndex()) {
+    for ((i, el) in knownHumanBoard.withIndex()) {
         if (el != CLOUD) {
             dummy = pdfBoard[i]
             pdfBoard[i] = 0

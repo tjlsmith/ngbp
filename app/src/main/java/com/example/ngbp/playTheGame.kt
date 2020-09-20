@@ -53,15 +53,18 @@ fun mainGamePlay(
     }
     // build pdf for computer move selection
     var pdf = IntArray(100)
-    var (killRow, killCol) = findFire(khb) // is there anything on fire on the human board?
+    //var (killRow, killCol) = findFire(khb) // is there anything on fire on the human board?
+    var (killRow, killCol) = findFire() // is there anything on fire on the human board?
     killmode = true
     if (killRow == -1 || killCol == -1) {
         killmode = false
     }
     if (killmode) { // check if COMPUTER made a hit!
-        pdf = makePdfKill(khb, hsl, killRow, killCol) // kill not hunt
+        //pdf = makePdfKill(khb, hsl, killRow, killCol) // kill not hunt
+        pdf = makePdfKill(hsl, killRow, killCol) // kill not hunt
     } else {
-        pdf = makePdfHunt(khb, hsl) // hunt not kill
+        //pdf = makePdfHunt(khb, hsl) // hunt not kill
+        pdf = makePdfHunt( hsl) // hunt not kill
     }
     // select the move from the pdf
     val move = selectMove(pdf)
