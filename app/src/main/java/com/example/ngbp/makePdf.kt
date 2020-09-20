@@ -2,6 +2,7 @@ package com.example.ngbp
 
 fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
     // return pdf of possible ships on human board
+    // no offset needed here
     var pdfBoard = IntArray(100) { WATER } // init to zero
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
     var list = mutableListOf<Int>()
@@ -20,7 +21,7 @@ fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
                             if (good) {
                                 for (i in 0..(listtt.size / 2) - 1) {
                                     val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
-                                    pdfBoard[index]+=shipLen
+                                    pdfBoard[index] += shipLen
                                 }
                             }
                         }
@@ -34,6 +35,7 @@ fun makePdfHunt(khb: IntArray, shipList: Array<ship>): IntArray {
 
 fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntArray {
     // return pdf of possible ships on human board on this one spot row col
+    // offset needed here
     var pdfBoard = IntArray(100) { WATER } // init to zero
     val vectors = intArrayOf(-1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1)
     var list = mutableListOf<Int>()
@@ -54,6 +56,9 @@ fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntAr
                             fireCount++
                         }
                     }
+                    if (fireCount > 1) {
+                        val dummy = 1
+                    }
                     for (i in 0..(listtt.size / 2) - 1) {
                         val index = listtt[2 * i] * 10 + listtt[2 * i + 1]
                         pdfBoard[index] += fireCount
@@ -64,7 +69,7 @@ fun makePdfKill(khb: IntArray, shipList: Array<ship>, row: Int, col: Int): IntAr
     }
     // zero actual hit point so it doesn't try and hit it again
     pdfBoard[row * 10 + col] = 0
-    for ((i,el) in khb.withIndex()) {
+    for ((i, el) in khb.withIndex()) {
         if (el != CLOUD) {
             pdfBoard[i] = 0
         }

@@ -45,7 +45,9 @@ fun hitUpDate(
     if (count == 0) {
         ShipList[shipN].floating = false // sunk if here!
         for (el in ShipList[shipN].location) {
-            knownBoard[-el] = SUNK
+            if (el != UNUSED) {
+                knownBoard[-el] = SUNK
+            }
         }
         killmode = false // back to hunt mode
         shipSunk = computerShipList[shipN].name

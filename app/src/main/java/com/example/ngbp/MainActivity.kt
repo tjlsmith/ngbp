@@ -42,7 +42,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.016
+const val VERSION = 0.018
 const val CLOUD = -1
 const val WATER = 0
 
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         val ngbpBoard = initTheGame()
         computerShipList = makeShipList(ngbpBoard, computerShipList)
         val banner = gameBanner
-        banner.text = "Nuts Good BattleSHip Program V." + VERSION
+        banner.text = "Nuts Good BattleShip Program V." + VERSION
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
         this.unKnownHumanBoard = makeNGBPBoard(humanShipList) // initilize human board

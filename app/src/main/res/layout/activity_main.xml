@@ -26,11 +26,11 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#FFFFFF"
-            android:tooltipText="Cloud"
             android:clickable="true"
             android:contextClickable="true"
             android:onClick="kaBoom"
             android:tag="00"
+            android:tooltipText="Cloud"
             app:layout_column="0"
             app:layout_row="0" />
 
