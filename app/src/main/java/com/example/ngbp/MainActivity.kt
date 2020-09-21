@@ -42,10 +42,9 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.020
+const val VERSION = 0.023
 const val CLOUD = -1
 const val WATER = 0
-
 // ships take 2-6
 const val FIRE = 7
 const val SUNK = 8
@@ -148,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             row,
             col,
             imgBtn,
-            knownHumanBoard,
+            //knownHumanBoard,
             unKnownHumanBoard,
             ngbpBoard,
             humanShipList,

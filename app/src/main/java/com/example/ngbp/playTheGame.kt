@@ -18,10 +18,10 @@ fun mainGamePlay(
     row: Int,
     col: Int,
     cBtn: ImageButton,
-    khb: IntArray,
+    //khb: IntArray,
     ukhb: IntArray,
     ngbpBoard: IntArray,
-    hsl: Array<ship>,
+    hsl: Array<ship>, // hsl is human ship list
     csl: Array<ship>
     //v: Button?
     //shipList: Array<ship>
