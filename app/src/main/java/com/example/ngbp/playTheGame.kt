@@ -32,9 +32,11 @@ fun mainGamePlay(
     var dummy = 0
     var wasAHit = false
     // android.graphics.Color.WHITE
+    /*
     if (ngboElement != CLOUD) { // already selected
         return Result(-1, false)
     }
+     */
     if (ngbpBoard.get(btnIndex) == WATER) {
         // water
         cBtn.setBackgroundColor(android.graphics.Color.BLUE)

@@ -5,10 +5,10 @@ import android.widget.ImageButton
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 
-fun drawHumanBoard(unKnownHumanBoard: IntArray, HumanGrid: GridLayout) {
+fun drawBoard(human: Boolean, Grid: GridLayout) {
     for ((index, square) in unKnownHumanBoard.withIndex()) { // background
         var hBtn =
-            HumanGrid.get(index) as ImageButton // set human board element colour based on result
+            Grid.get(index) as ImageButton // set human board element colour based on result
         if (square == CLOUD) {
             hBtn.setBackgroundColor(android.graphics.Color.WHITE)
             hBtn.tooltipText = "Cloud"
@@ -22,7 +22,7 @@ fun drawHumanBoard(unKnownHumanBoard: IntArray, HumanGrid: GridLayout) {
     }
     for ((index, square) in knownHumanBoard.withIndex()) {
         var hBtn =
-            HumanGrid.get(index) as ImageButton // set human board element colour based on result
+            Grid.get(index) as ImageButton // set human board element colour based on result
         if (square == FIRE) {
             hBtn.setBackgroundColor(android.graphics.Color.RED)
             hBtn.tooltipText = "Fire"

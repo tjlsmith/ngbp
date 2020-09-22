@@ -36,10 +36,10 @@ fun initTheGame(): IntArray {
     var humanPoint = 20 // points
     var ngbpPoint = 20 // points
 
-    var ngbpBoard = makeNGBPBoard(humanShipList) // put ships on computers board
+    var ngbpBoard = makeSecretBoard(humanShipList) // put ships on computers board
     var best = rating(ngbpBoard)
     for (i in 0..1000) {
-        var newB = makeNGBPBoard(humanShipList)
+        var newB = makeSecretBoard(humanShipList)
         var newRating = rating(newB)
         if (newRating < best) {
             best = newRating

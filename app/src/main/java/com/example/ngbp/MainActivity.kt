@@ -44,6 +44,7 @@ data class Result(
 
 const val VERSION = 0.025
 const val CLOUD = -1
+const val CLEAR = 0
 const val WATER = 1
 
 // ships take 2-6
@@ -68,6 +69,9 @@ var computerShipList = arrayOf<ship>(
 )
 var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
 var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
+
+var humanCloudMap = IntArray(100) { CLOUD } // human cloud map
+var ngbpCloudMap = IntArray(100) { CLOUD } // nsbp cloud map
 
 var killmode = false
 var killRow = 0
@@ -101,10 +105,10 @@ class MainActivity : AppCompatActivity() {
         banner.text = "Nuts Good BattleShip Program V." + VERSION
         // Initialize this variable
         this.ngbpBoard = ngbpBoard
-        this.unKnownHumanBoard = makeNGBPBoard(humanShipList) // initilize human board
+        this.unKnownHumanBoard = makeSecretBoard(humanShipList) // initialize human board
         var best = rating(this.unKnownHumanBoard)
         for (i in 0..100) {
-            var newB = makeNGBPBoard(humanShipList)
+            var newB = makeSecretBoard(humanShipList)
             var newRating = rating(newB)
             if (newRating < best) {
                 best = newRating
@@ -115,10 +119,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         humanShipList = makeShipList(unKnownHumanBoard, humanShipList)
-        drawHumanBoard(unKnownHumanBoard, HumanGrid)
+        drawBoard(unKnownHumanBoard, HumanGrid)
         val dummy = 1
         // this.shipList = shipList
-    }
+    } // big starting routine
 
     fun kaBoom(v: View?) {
         // process human move
@@ -134,6 +138,13 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
+        if (ngbpCloudMap[tag] == CLEAR) {
+            // already shelled
+            return
+        }
+
+        ngbpCloudMap[tag] = CLEAR // clear this spot
+
         val hMove = tag
         val hAnno = hSunkAnnouncer // as TextView
         hAnno.setVisibility(View.GONE)
@@ -238,6 +249,7 @@ class MainActivity : AppCompatActivity() {
             //val col = imgBtn.name
             //val row = imgBtn.NGBP.rowCount
         } // if cMove >= 0
-        drawHumanBoard(unKnownHumanBoard, HumanGrid)
+        drawBoard(unKnownHumanBoard, HumanGrid)
+        drawBoard(ngbspStateBoard, HumanGrid)
     } //kaboom
 }
