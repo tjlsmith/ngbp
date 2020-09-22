@@ -42,9 +42,10 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.023
+const val VERSION = 0.025
 const val CLOUD = -1
-const val WATER = 0
+const val WATER = 1
+
 // ships take 2-6
 const val FIRE = 7
 const val SUNK = 8
@@ -236,6 +237,7 @@ class MainActivity : AppCompatActivity() {
             val dummy = 1
             //val col = imgBtn.name
             //val row = imgBtn.NGBP.rowCount
-        }
-    }
+        } // if cMove >= 0
+        drawHumanBoard(unKnownHumanBoard, HumanGrid)
+    } //kaboom
 }
