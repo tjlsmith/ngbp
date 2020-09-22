@@ -99,12 +99,12 @@ fun check(
     for (l in 0..shipLen - 1) {
         val newRow = row + (l - offSet) * vdRow
         val newCol = col + (l - offSet) * vdCol
-        val newIndex = newRow * 10 + newCol
         if (newCol < 0 || newRow < 0 || newCol > 9 || newRow > 9) {
             good = false // must be in bounds
             break
         } else {
             // ok inbounds check contents of square
+            val newIndex = newRow * 10 + newCol
             if (board[newIndex] != CLOUD) {
                 if (killmode && board[newIndex] == FIRE) {
                     // exception for killmode

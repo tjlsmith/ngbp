@@ -8,7 +8,7 @@
 
 
     <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/NGBP"
+        android:id="@+id/NgbpGrid"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="1dp"
@@ -2052,7 +2052,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NGBP" />
+        app:layout_constraintTop_toBottomOf="@+id/NgbpGrid" />
 
     <TextView
         android:id="@+id/NGBPPoints"
@@ -2081,7 +2081,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/gameBanner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/NGBP"
+        app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -2093,7 +2093,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/NGBP"
+        app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
         app:layout_constraintTop_toBottomOf="@+id/HPoints" />
 
     <TextView

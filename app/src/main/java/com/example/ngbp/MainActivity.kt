@@ -28,7 +28,7 @@ data class ship(
 )
 
 data class initVals(
-    var ngbpBoard: IntArray,
+    var secretNgbpBoard: IntArray,
     val shipList: Array<*>
 )
 
@@ -60,14 +60,14 @@ var humanShipList = arrayOf<ship>(
     ship("Submarine", 2, true, IntArray(6))
 )
 
-var computerShipList = arrayOf<ship>(
+var ngbpShipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6, true, IntArray(6)),
     ship("BattleShip", 5, true, IntArray(6)),
     ship("Destroyer", 4, true, IntArray(6)),
     ship("Cruiser", 3, true, IntArray(6)),
     ship("Submarine", 2, true, IntArray(6))
 )
-var ngbspStateBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
+var knownNgbpBoard = IntArray(100) { CLOUD } // element set to one when its button is clicked
 var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
 
 var humanCloudMap = IntArray(100) { CLOUD } // human cloud map
@@ -81,15 +81,15 @@ class MainActivity : AppCompatActivity() {
     // Do not initialize yet
     // https://stackoverflow.com/questions/63760283/how-do-i-pass-an-array-up-to-a-higher-scope/63765137#63765137
     // C:\Users\Terry\Pictures\Screenshots\Screenshot (528) passing arrays in Kotlin stackoverflow.png
-    private lateinit var ngbpBoard: IntArray
-    private lateinit var unKnownHumanBoard: IntArray // the actual state of the human board
+    private lateinit var secretNgbpBoard: IntArray
+    private lateinit var secretHumanBoard: IntArray // the actual state of the human board
     //private lateinit var shipList: Array<ship>
 
-    //var unKnownHumanBoard = IntArray(100) { WATER } // actual human ship layout
+    //var secretHumanBoard = IntArray(100) { WATER } // actual human ship layout
     //var knownHumanBoard = IntArray(100) { CLOUD } // known to the computer human ship layout
 
-    //(ngbpBoard, shipList) = com.example.ngbp.initTheGame()
-    //lateinit var ngbpBoard = IntArray(100) { WATER }
+    //(secretNgbpBoard, shipList) = com.example.ngbp.initTheGame()
+    //lateinit var secretNgbpBoard = IntArray(100) { WATER }
     var humanPoint = 20
     var ngbpPoint = 20
 
@@ -98,28 +98,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val (ngbpBoard, shipList) = initTheGame()
-        val ngbpBoard = initTheGame()
-        computerShipList = makeShipList(ngbpBoard, computerShipList)
+        //val (secretNgbpBoard, shipList) = initTheGame()
+        val secretNgbpBoard = initTheGame()
+        ngbpShipList = makeShipList(secretNgbpBoard, ngbpShipList)
         val banner = gameBanner
         banner.text = "Nuts Good BattleShip Program V." + VERSION
         // Initialize this variable
-        this.ngbpBoard = ngbpBoard
-        this.unKnownHumanBoard = makeSecretBoard(humanShipList) // initialize human board
-        var best = rating(this.unKnownHumanBoard)
-        for (i in 0..100) {
+        this.secretNgbpBoard = secretNgbpBoard
+        this.secretHumanBoard = makeSecretBoard(humanShipList) // initialize human board
+        var best = rating(this.secretHumanBoard)
+        for (i in 0..100) { // try 100 times to make good human ship distribution
             var newB = makeSecretBoard(humanShipList)
             var newRating = rating(newB)
             if (newRating < best) {
                 best = newRating
-                this.unKnownHumanBoard = newB
+                this.secretHumanBoard = newB
             }
             if (best == 0) {
                 break
             }
         }
-        humanShipList = makeShipList(unKnownHumanBoard, humanShipList)
-        drawBoard(unKnownHumanBoard, HumanGrid)
+        humanShipList = makeShipList(secretHumanBoard, humanShipList)
+        drawBoard(true, HumanGrid)
         val dummy = 1
         // this.shipList = shipList
     } // big starting routine
@@ -138,6 +138,7 @@ class MainActivity : AppCompatActivity() {
             row = tag / 10
             col = tag % 10
         }
+
         if (ngbpCloudMap[tag] == CLEAR) {
             // already shelled
             return
@@ -151,8 +152,8 @@ class MainActivity : AppCompatActivity() {
         val cAnno = cSunkAnnouncer // as TextView
         cAnno.setVisibility(View.GONE)
 
-        // mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard, shipList)
-        //mainGamePlay(row, col, imgBtn, knownHumanBoard, unKnownHumanBoard, ngbpBoard,v)
+        // mainGamePlay(row, col, imgBtn, knownHumanBoard, secretHumanBoard, secretNgbpBoard, shipList)
+        //mainGamePlay(row, col, imgBtn, knownHumanBoard, secretHumanBoard, secretNgbpBoard,v)
 
         // human moved hMove - now computer returns
         val (cMove, humanMadeAHit) = mainGamePlay(
@@ -160,10 +161,10 @@ class MainActivity : AppCompatActivity() {
             col,
             imgBtn,
             //knownHumanBoard,
-            unKnownHumanBoard,
-            ngbpBoard,
+            secretHumanBoard,
+            secretNgbpBoard,
             humanShipList,
-            computerShipList
+            ngbpShipList
         )
         v.invalidate()
         // wait for 1 second
@@ -182,12 +183,12 @@ class MainActivity : AppCompatActivity() {
         //}
 
         if (humanMadeAHit) { // change computer score if necessary
-            var (NGBPScore, computerShipList, shipSunk, ngbpBoard) = hitUpDate(
+            var (NGBPScore, ngbpShipList, shipSunk, secretNgbpBoard) = hitUpDate(
                 NGBPScore,
                 hMove,
-                ngbpBoard,
-                ngbpBoard,
-                computerShipList
+                secretNgbpBoard,
+                secretNgbpBoard,
+                ngbpShipList
             )
             if (shipSunk.length != 0) {
                 cAnno.setText("You sunk my " + shipSunk + "!")
@@ -204,7 +205,7 @@ class MainActivity : AppCompatActivity() {
         if (cMove >= 0) {
             var hBtn =
                 HumanGrid.get(cMove) as ImageButton // set human board element colour based on result
-            if (unKnownHumanBoard[cMove] == WATER) {
+            if (secretHumanBoard[cMove] == WATER) {
                 hBtn.setBackgroundColor(android.graphics.Color.BLUE)
                 hBtn.tooltipText = "Water"
                 knownHumanBoard[cMove] = WATER
@@ -223,7 +224,7 @@ class MainActivity : AppCompatActivity() {
                 hBtn.tooltipText = "Fire"
 
                 var (HumanScore, HumanShipList, shipSunk, knownHumanBoard) = hitUpDate(
-                    HumanScore, cMove, unKnownHumanBoard, knownHumanBoard,
+                    HumanScore, cMove, secretHumanBoard, knownHumanBoard,
                     humanShipList
                 )
                 if (HumanScore.text.toString().toInt() == 0) {
@@ -249,7 +250,7 @@ class MainActivity : AppCompatActivity() {
             //val col = imgBtn.name
             //val row = imgBtn.NGBP.rowCount
         } // if cMove >= 0
-        drawBoard(unKnownHumanBoard, HumanGrid)
-        drawBoard(ngbspStateBoard, HumanGrid)
+        drawBoard(true, HumanGrid)
+        drawBoard(false, NgbpGrid)
     } //kaboom
 }

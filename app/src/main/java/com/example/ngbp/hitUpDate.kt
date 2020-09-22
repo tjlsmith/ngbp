@@ -50,8 +50,8 @@ fun hitUpDate(
             }
         }
         killmode = false // back to hunt mode
-        shipSunk = computerShipList[shipN].name
-        //hSunkAnnouncer.setText("You sunk my " + computerShipList[shipN].name + "!")
+        shipSunk = ngbpShipList[shipN].name
+        //hSunkAnnouncer.setText("You sunk my " + ngbpShipList[shipN].name + "!")
         //hSunkAnnouncer.visibility(VISIBLE)
     }
     val rT = newScore(Score, ShipList, shipSunk, knownBoard) // return modified datums!

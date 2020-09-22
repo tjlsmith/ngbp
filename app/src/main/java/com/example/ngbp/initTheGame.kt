@@ -4,13 +4,13 @@ package com.example.ngbp
 fun initTheGame(): IntArray {
 
     // actual position of ships on human board
-    // var unKnownHumanBoard = Array(10) { IntArray(10) }
-    //var unKnownHumanBoard = IntArray(100) { 0 }
+    // var secretHumanBoard = Array(10) { IntArray(10) }
+    //var secretHumanBoard = IntArray(100) { 0 }
     // return state of enemy's board - what ngbp learns through shelling
     //var knownHumanBoard = Array(10) { IntArray(10) {-1}} // default to -1
     //var knownHumanBoard = IntArray(100) { -1 } // default to -1
     // return computer's board
-    //var ngbpBoard = IntArray(100) { 0 }
+    //var secretNgbpBoard = IntArray(100) { 0 }
 
     // return available enemy ship list
 
@@ -36,14 +36,14 @@ fun initTheGame(): IntArray {
     var humanPoint = 20 // points
     var ngbpPoint = 20 // points
 
-    var ngbpBoard = makeSecretBoard(humanShipList) // put ships on computers board
-    var best = rating(ngbpBoard)
+    var secretNgbpBoard = makeSecretBoard(humanShipList) // put ships on computers board
+    var best = rating(secretNgbpBoard)
     for (i in 0..1000) {
         var newB = makeSecretBoard(humanShipList)
         var newRating = rating(newB)
         if (newRating < best) {
             best = newRating
-            ngbpBoard = newB
+            secretNgbpBoard = newB
         }
         if (best == 0){
             break
@@ -51,9 +51,9 @@ fun initTheGame(): IntArray {
     }
 
 
-    //val retVal = initVals(ngbpBoard, shipList)
+    //val retVal = initVals(secretNgbpBoard, shipList)
 
-    return ngbpBoard
+    return secretNgbpBoard
 }
 
 /*
