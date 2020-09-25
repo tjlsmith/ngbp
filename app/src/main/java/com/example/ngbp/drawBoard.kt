@@ -17,7 +17,7 @@ fun drawBoard(human: Boolean, Grid: GridLayout) {
 
     for ((index, square) in cloudBoard.withIndex()) { // background
         var bTn =
-            Grid.get(index) as ImageButton // set human board element colour based on result
+            Grid.get(index) as ImageButton // set board element colour based on result
         if (square == CLOUD) {
             bTn.setBackgroundColor(android.graphics.Color.WHITE)
             bTn.tooltipText = "Cloud"
@@ -26,10 +26,10 @@ fun drawBoard(human: Boolean, Grid: GridLayout) {
             // states are fire sunk or water
 
             //for ((index, square) in knownHumanBoard.withIndex()) {
-            var squareK = knownBoard[index]
-            // var bTn = Grid.get(index) as ImageButton // set human board element colour based on result
+            var squareK = knownBoard[index] // ok hole in clouds - lets see what's there!
+            // var bTn = Grid.get(index) as ImageButton // set board element colour based on result
             if (squareK == FIRE) {
-                bTn.setBackgroundColor(android.graphics.Color.RED)
+               bTn.setBackgroundColor(android.graphics.Color.RED)
                 bTn.tooltipText = "Fire"
             } else if (squareK == SUNK) {
                 bTn.setBackgroundColor(android.graphics.Color.BLACK)

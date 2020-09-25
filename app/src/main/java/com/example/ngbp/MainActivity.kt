@@ -42,7 +42,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.025
+const val VERSION = 0.027
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         humanShipList = makeShipList(secretHumanBoard, humanShipList)
-        drawBoard(true, HumanGrid)
+        //drawBoard(true, HumanGrid) // init
         val dummy = 1
         // this.shipList = shipList
     } // big starting routine
@@ -166,7 +166,6 @@ class MainActivity : AppCompatActivity() {
             humanShipList,
             ngbpShipList
         )
-        v.invalidate()
         // wait for 1 second
         //Timer().schedule(1000) {
         //}
@@ -206,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             var hBtn =
                 HumanGrid.get(cMove) as ImageButton // set human board element colour based on result
             if (secretHumanBoard[cMove] == WATER) {
-                hBtn.setBackgroundColor(android.graphics.Color.BLUE)
+                hBtn.setBackgroundColor(android.graphics.Color.YELLOW) // sets human board water here!
                 hBtn.tooltipText = "Water"
                 knownHumanBoard[cMove] = WATER
             } else {
@@ -220,7 +219,7 @@ class MainActivity : AppCompatActivity() {
                     killRow = cMove / 10
                     killCol = cMove % 10
                 }
-                hBtn.setBackgroundColor(android.graphics.Color.RED)
+                hBtn.setBackgroundColor(android.graphics.Color.MAGENTA) // sets ngbp board fire here!
                 hBtn.tooltipText = "Fire"
 
                 var (HumanScore, HumanShipList, shipSunk, knownHumanBoard) = hitUpDate(
@@ -243,6 +242,8 @@ class MainActivity : AppCompatActivity() {
                 //HumanScore.setText(hScore.toString())
                 knownHumanBoard[cMove] = FIRE
             }
+            // set human sunk here
+            for (ship in humanShipList){}
             //v.invalidate()
             // val hImgBtn = ("imageButtonH"+Integer.toString(move)) as ImageButton
             // dummy = 0
@@ -250,7 +251,9 @@ class MainActivity : AppCompatActivity() {
             //val col = imgBtn.name
             //val row = imgBtn.NGBP.rowCount
         } // if cMove >= 0
-        drawBoard(true, HumanGrid)
-        drawBoard(false, NgbpGrid)
+        //drawBoard(true, HumanGrid)
+        //drawBoard(false, NgbpGrid)
+        //HumanGrid.postInvalidate()
+        //v.postInvalidate()
     } //kaboom
 }

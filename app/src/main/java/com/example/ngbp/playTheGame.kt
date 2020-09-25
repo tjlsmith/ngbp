@@ -39,7 +39,7 @@ fun mainGamePlay(
      */
     if (secretNgbpBoard.get(btnIndex) == WATER) {
         // water
-        cBtn.setBackgroundColor(android.graphics.Color.BLUE)
+        cBtn.setBackgroundColor(android.graphics.Color.GREEN) // sets ngbp board water here!
         cBtn.tooltipText = "Water"
         cBtn.isClickable = false // can't reclick a square
         knownNgbpBoard.set(btnIndex, WATER) // cant reclick
@@ -48,11 +48,12 @@ fun mainGamePlay(
     } else {
         // hit!
         wasAHit = true
-        cBtn.setBackgroundColor(RED)
+        cBtn.setBackgroundColor(android.graphics.Color.CYAN) // set ngbp board fire here!
         cBtn.tooltipText = "Fire"
         cBtn.isClickable = false // can't reclick a square
         knownNgbpBoard.set(btnIndex, FIRE) // cant reclick
     }
+    // set ngbp sunk here
     // build pdf for computer move selection
     var pdf = IntArray(100)
     //var (killRow, killCol) = findFire(khb) // is there anything on fire on the human board?
