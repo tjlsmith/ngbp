@@ -4,8 +4,10 @@ import android.graphics.Color
 import android.graphics.Color.RED
 import android.graphics.Color.WHITE
 import android.widget.GridLayout
+import androidx.gridlayout.widget.GridLayout as GridLayout2
 import android.widget.ImageButton
 import androidx.core.view.get
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.NGBPPoints
 import kotlinx.android.synthetic.main.activity_main.view.HumanGrid
 import java.time.LocalDateTime
@@ -22,7 +24,8 @@ fun mainGamePlay(
     ukhb: IntArray,
     secretNgbpBoard: IntArray,
     hsl: Array<ship>, // hsl is human ship list
-    csl: Array<ship>
+    csl: Array<ship>,
+    hG: GridLayout2
     //v: Button?
     //shipList: Array<ship>
 ): Result {
@@ -53,7 +56,21 @@ fun mainGamePlay(
         cBtn.isClickable = false // can't reclick a square
         knownNgbpBoard.set(btnIndex, FIRE) // cant reclick
     }
+
     // set ngbp sunk here
+    for (ship in ngbpShipList) {
+        if (!ship.floating) {
+            // if here, ship actually sunk
+            for (square in ship.location) {
+                if (square < 0) {
+                    var hBtnSunk =
+                        hG.get(-square) as ImageButton // set human board element colour based on result
+                    hBtnSunk.setBackgroundColor(android.graphics.Color.BLACK) // sets square sunk here!
+                }
+            }
+        }
+    }
+
     // build pdf for computer move selection
     var pdf = IntArray(100)
     //var (killRow, killCol) = findFire(khb) // is there anything on fire on the human board?
