@@ -25,7 +25,7 @@ fun mainGamePlay(
     secretNgbpBoard: IntArray,
     hsl: Array<ship>, // hsl is human ship list
     csl: Array<ship>,
-    hG: GridLayout2
+    nG: GridLayout2
     //v: Button?
     //shipList: Array<ship>
 ): Result {
@@ -64,7 +64,7 @@ fun mainGamePlay(
             for (square in ship.location) {
                 if (square < 0) {
                     var hBtnSunk =
-                        hG.get(-square) as ImageButton // set human board element colour based on result
+                        nG.get(-square) as ImageButton // set human board element colour based on result
                     hBtnSunk.setBackgroundColor(android.graphics.Color.BLACK) // sets square sunk here!
                 }
             }

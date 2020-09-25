@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
             secretNgbpBoard,
             humanShipList,
             ngbpShipList,
-            HumanGrid
+            NgbpGrid
         )
         // wait for 1 second
         //Timer().schedule(1000) {
@@ -250,7 +250,7 @@ class MainActivity : AppCompatActivity() {
                     for (square in ship.location) {
                         if (square < 0) {
                             var hBtnSunk =
-                                NgbpGrid.get(-square) as ImageButton // set human board element colour based on result
+                                HumanGrid.get(-square) as ImageButton // set human board element colour based on result
                             hBtnSunk.setBackgroundColor(android.graphics.Color.BLACK) // sets square sunk here!
                         }
                     }
