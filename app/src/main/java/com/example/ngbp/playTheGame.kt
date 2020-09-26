@@ -42,7 +42,8 @@ fun mainGamePlay(
      */
     if (secretNgbpBoard.get(btnIndex) == WATER) {
         // water
-        cBtn.setBackgroundColor(android.graphics.Color.GREEN) // sets ngbp board water here!
+        //cBtn.setBackgroundColor(android.graphics.Color.GREEN) // sets ngbp board water here!
+        cBtn.setBackgroundColor(android.graphics.Color.BLUE) // sets ngbp board water here!
         cBtn.tooltipText = "Water"
         cBtn.isClickable = false // can't reclick a square
         knownNgbpBoard.set(btnIndex, WATER) // cant reclick
@@ -51,7 +52,8 @@ fun mainGamePlay(
     } else {
         // hit!
         wasAHit = true
-        cBtn.setBackgroundColor(android.graphics.Color.CYAN) // set ngbp board fire here!
+        //cBtn.setBackgroundColor(android.graphics.Color.CYAN) // set ngbp board fire here!
+        cBtn.setBackgroundColor(android.graphics.Color.RED) // set ngbp board fire here!
         cBtn.tooltipText = "Fire"
         cBtn.isClickable = false // can't reclick a square
         knownNgbpBoard.set(btnIndex, FIRE) // cant reclick
@@ -63,6 +65,7 @@ fun mainGamePlay(
             // if here, ship actually sunk
             for (square in ship.location) {
                 if (square < 0) {
+                    knownNgbpBoard[-square]=SUNK
                     var hBtnSunk =
                         nG.get(-square) as ImageButton // set human board element colour based on result
                     hBtnSunk.setBackgroundColor(android.graphics.Color.BLACK) // sets square sunk here!
