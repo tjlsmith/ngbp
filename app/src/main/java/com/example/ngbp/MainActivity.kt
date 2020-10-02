@@ -45,7 +45,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.033
+const val VERSION = 0.038
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -98,6 +98,18 @@ class MainActivity : AppCompatActivity() {
     var humanPoint = 20
     var ngbpPoint = 20
 
+    // ELO data
+    var hELO = 1500
+    var hWINS = 0
+    var hLOSES = 0
+    var eH = 0.5f
+    var ngELO = 1500
+    var ngWINS = 0
+    var ngLOSES = 0
+    var eNG = 0.5f
+    var hExpected = 0.5
+    var ngExpected = 0.5
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -105,17 +117,17 @@ class MainActivity : AppCompatActivity() {
 
         // get rankings
         val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
-        val hELO = sp.getInt("hELO", 1500)
-        val hWINS = sp.getInt("hWINS", 0)
-        val hLOSES = sp.getInt("hLOSES", 0)
-        val eH = sp.getFloat("eH", 0.5f)
-        val ngELO = sp.getInt("ngELO", 1500)
-        val ngWINS = sp.getInt("ngWINS", 0)
-        val ngLOSES = sp.getInt("ngLOSES", 0)
-        val eNG = sp.getFloat("eNG", 0.5f)
+        hELO = sp.getInt("hELO", 1500)
+        hWINS = sp.getInt("hWINS", 0)
+        hLOSES = sp.getInt("hLOSES", 0)
+        eH = sp.getFloat("eH", 0.5f)
+        ngELO = sp.getInt("ngELO", 1500)
+        ngWINS = sp.getInt("ngWINS", 0)
+        ngLOSES = sp.getInt("ngLOSES", 0)
+        eNG = sp.getFloat("eNG", 0.5f)
+        hExpected = (1.0f / (1.0f + 10.0.pow((ngELO - hELO) / 400.0)))
+        ngExpected = 1.0 - hExpected
         var editor = sp.edit()
-        val hExpected = (1.0f / (1.0f + 10.0.pow((ngELO - hELO) / 400.0)))
-        val ngExpected = 1.0 - hExpected
         editor.putInt("hELO", hELO)
         editor.putInt("ngELO", ngELO)
         editor.putInt("hELO", hELO)
@@ -232,7 +244,19 @@ class MainActivity : AppCompatActivity() {
         if (NGBPScore.text.toString().toInt() == 0) {
             val hAnno = hSunkAnnouncer // as TextView
             hAnno.setText("Human Wins!")
-            gameMode="OVER"
+            gameMode = "OVER"
+            // recalc ELOs
+            hWINS++
+            ngLOSES++
+            hELO = hELO + (32 * (1.0 - eH)).toInt()
+            ngELO = ngELO + (32 * (0.0 - eNG)).toInt()
+            val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
+            var editor = sp.edit()
+            editor.putInt("hELO", hELO)
+            editor.putInt("ngELO", ngELO)
+            editor.putInt("hWINS", hWINS)
+            editor.putInt("ngLOSES", ngLOSES)
+            editor.commit()
             hAnno.setVisibility(View.VISIBLE)
         }
 
@@ -269,7 +293,19 @@ class MainActivity : AppCompatActivity() {
                     // val cAnno = cSunkAnnouncer // as TextView
                     cAnno.setText("NGBP Wins!")
                     cAnno.setVisibility(View.VISIBLE)
-                    gameMode="OVER"
+                    gameMode = "OVER"
+                    // recalc ELOs
+                    ngWINS++
+                    hLOSES++
+                    ngELO = ngELO + (32 * (1.0 - eNG)).toInt()
+                    hELO = hELO + (32 * (0.0 - eH)).toInt()
+                    val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
+                    var editor = sp.edit()
+                    editor.putInt("hLOSES", hLOSES)
+                    editor.putInt("ngWINS", ngWINS)
+                    editor.putInt("hELO", hELO)
+                    editor.putInt("ngELO", ngELO)
+                    editor.commit()
                 } else {
                     if (shipSunk.length != 0) {
                         // val hAnno = hSunkAnnouncer // as TextView
