@@ -1,6 +1,8 @@
 package com.example.ngbp
 
 import android.bluetooth.BluetoothSocket
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -17,6 +19,7 @@ import java.time.LocalDateTime.now
 import java.time.LocalTime.now
 import java.util.*
 import kotlin.concurrent.schedule
+import kotlin.math.pow
 
 // import kotlinx.android.synthetic.main.layout.view.*
 
@@ -42,7 +45,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.030
+const val VERSION = 0.033
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -98,11 +101,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // get rankings
+        val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
+        val hELO = sp.getInt("hELO", 1500)
+        val ngELO = sp.getInt("ngELO", 1500)
+        var editor = sp.edit()
+        val hExpected = 1.0 / (1.0 + 10.0.pow((ngELO - hELO) / 400.0))
+        val ngExpected = 1.0 - hExpected
+        editor.putInt("hELO", hELO)
+        editor.putInt("ngELO", ngELO)
+        editor.commit()
+        hELOText.setText(hELO.toString())
+        ngELOText.setText(ngELO.toString())
+
         //val (secretNgbpBoard, shipList) = initTheGame()
         val secretNgbpBoard = initTheGame()
         ngbpShipList = makeShipList(secretNgbpBoard, ngbpShipList)
         val banner = gameBanner
-        banner.text = "Nuts Good BattleShip Program V." + VERSION
+        banner.text = "Nuts Good BattleShip Program\nV." + VERSION
         // Initialize this variable
         this.secretNgbpBoard = secretNgbpBoard
         this.secretHumanBoard = makeSecretBoard(humanShipList) // initialize human board
@@ -222,6 +238,7 @@ class MainActivity : AppCompatActivity() {
                     killCol = cMove % 10
                 }
                 //hBtn.setBackgroundColor(android.graphics.Color.MAGENTA) // sets ngbp board fire here!
+                knownHumanBoard[cMove] = FIRE
                 hBtn.setBackgroundColor(android.graphics.Color.RED) // sets ngbp board fire here!
                 hBtn.tooltipText = "Fire"
 
@@ -244,6 +261,18 @@ class MainActivity : AppCompatActivity() {
                 //hScore -= 1 // loses a point in the hit
                 //HumanScore.setText(hScore.toString())
                 knownHumanBoard[cMove] = FIRE
+            }
+            for (square in 0..99) {
+                if (secretHumanBoard[square] > WATER) {
+                    var hBtnSunk =
+                        HumanGrid.get(square) as android.widget.ImageButton // set human board element colour based on result
+                    hBtnSunk.setBackgroundColor(android.graphics.Color.LTGRAY) // sets square sunk here!
+                    if (knownHumanBoard[square] == FIRE) {
+                        var hBtnSunk =
+                            HumanGrid.get(square) as android.widget.ImageButton // set human board element colour based on result
+                        hBtnSunk.setBackgroundColor(android.graphics.Color.RED) // sets square sunk here!
+                    }
+                }
             }
             // set ngbp sunk here
             for (ship in humanShipList) {

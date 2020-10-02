@@ -2045,7 +2045,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:text="Nuts Good Battleship Program V 0.001"
+        android:text="Nuts Good Battleship Program\n V 0.001"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/HumanGrid"
@@ -2088,7 +2088,7 @@
         android:id="@+id/HumanScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:text="20"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -2100,7 +2100,7 @@
         android:id="@+id/NGBPScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="20"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -2140,5 +2140,23 @@
         app:layout_constraintBottom_toBottomOf="@+id/HumanGrid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/hELOText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:text="1500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HPoints" />
+
+    <TextView
+        android:id="@+id/ngELOText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1500"
+        app:layout_constraintEnd_toEndOf="@id/NGBPScore"
+        app:layout_constraintTop_toBottomOf="@+id/NGBPPoints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
