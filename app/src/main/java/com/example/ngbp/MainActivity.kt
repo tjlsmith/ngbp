@@ -55,6 +55,8 @@ const val FIRE = 7
 const val SUNK = 8
 const val UNUSED = 100
 
+var gameMode = "START" // START to PLAYING to OVER
+
 var humanShipList = arrayOf<ship>(
     ship("Aircraft Carrier", 6, true, IntArray(6)),
     ship("BattleShip", 5, true, IntArray(6)),
@@ -104,12 +106,22 @@ class MainActivity : AppCompatActivity() {
         // get rankings
         val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
         val hELO = sp.getInt("hELO", 1500)
+        val hWINS = sp.getInt("hWINS", 0)
+        val hLOSES = sp.getInt("hLOSES", 0)
+        val eH = sp.getFloat("eH", 0.5f)
         val ngELO = sp.getInt("ngELO", 1500)
+        val ngWINS = sp.getInt("ngWINS", 0)
+        val ngLOSES = sp.getInt("ngLOSES", 0)
+        val eNG = sp.getFloat("eNG", 0.5f)
         var editor = sp.edit()
-        val hExpected = 1.0 / (1.0 + 10.0.pow((ngELO - hELO) / 400.0))
+        val hExpected = (1.0f / (1.0f + 10.0.pow((ngELO - hELO) / 400.0)))
         val ngExpected = 1.0 - hExpected
         editor.putInt("hELO", hELO)
         editor.putInt("ngELO", ngELO)
+        editor.putInt("hELO", hELO)
+        editor.putInt("ngELO", ngELO)
+        editor.putFloat("eH",hExpected.toFloat())
+        editor.putFloat("eNG",ngExpected.toFloat())
         editor.commit()
         hELOText.setText(hELO.toString())
         ngELOText.setText(ngELO.toString())
