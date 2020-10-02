@@ -120,8 +120,8 @@ class MainActivity : AppCompatActivity() {
         editor.putInt("ngELO", ngELO)
         editor.putInt("hELO", hELO)
         editor.putInt("ngELO", ngELO)
-        editor.putFloat("eH",hExpected.toFloat())
-        editor.putFloat("eNG",ngExpected.toFloat())
+        editor.putFloat("eH", hExpected.toFloat())
+        editor.putFloat("eNG", ngExpected.toFloat())
         editor.commit()
         hELOText.setText(hELO.toString())
         ngELOText.setText(ngELO.toString())
@@ -155,6 +155,12 @@ class MainActivity : AppCompatActivity() {
     fun kaBoom(v: View?) {
         // process human move
         // var button = findViewById<Button>(R.id.NGBP.)
+        if (gameMode != "START" && gameMode != "PLAYING") {
+            return
+        }
+        if (gameMode == "START") {
+            gameMode = "PLAYING"
+        }
         val imgBtn = findViewById(v!!.id) as ImageButton
         val tag = Integer.parseInt(v.getTag().toString()) //.toInt()
         var row = -1
@@ -226,6 +232,7 @@ class MainActivity : AppCompatActivity() {
         if (NGBPScore.text.toString().toInt() == 0) {
             val hAnno = hSunkAnnouncer // as TextView
             hAnno.setText("Human Wins!")
+            gameMode="OVER"
             hAnno.setVisibility(View.VISIBLE)
         }
 
@@ -262,6 +269,7 @@ class MainActivity : AppCompatActivity() {
                     // val cAnno = cSunkAnnouncer // as TextView
                     cAnno.setText("NGBP Wins!")
                     cAnno.setVisibility(View.VISIBLE)
+                    gameMode="OVER"
                 } else {
                     if (shipSunk.length != 0) {
                         // val hAnno = hSunkAnnouncer // as TextView
