@@ -45,7 +45,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.043
+const val VERSION = 0.044
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -238,6 +238,14 @@ class MainActivity : AppCompatActivity() {
                 secretNgbpBoard,
                 ngbpShipList
             )
+            var oS = ""
+            for ((i, el) in ngbpShipList.withIndex()) {
+                // change ngShipsTV
+                if (el.floating) {
+                    oS+=el.name[0]+" "
+                }
+            }
+            ngShipsTV.setText(oS)
             if (shipSunk.length != 0) {
                 cAnno.setText("You sunk my " + shipSunk + "!")
                 cAnno.setVisibility(View.VISIBLE)
@@ -291,6 +299,14 @@ class MainActivity : AppCompatActivity() {
                     HumanScore, cMove, secretHumanBoard, knownHumanBoard,
                     humanShipList
                 )
+                var oS = ""
+                for ((i, el) in humanShipList.withIndex()) {
+                    // change ngShipsTV
+                    if (el.floating) {
+                        oS+=el.name[0]+" "
+                    }
+                }
+                hShipsTV.setText(oS)
                 if (HumanScore.text.toString().toInt() == 0) {
                     // val cAnno = cSunkAnnouncer // as TextView
                     cAnno.setText("NGBP Wins!")
