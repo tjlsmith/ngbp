@@ -2175,4 +2175,26 @@
         app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
         app:layout_constraintTop_toBottomOf="@+id/ngELOText" />
 
+    <TextView
+        android:id="@+id/hShipsTV"
+        android:layout_width="27dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="6dp"
+        android:text="A B D C S"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HumanScore" />
+
+    <TextView
+        android:id="@+id/ngShipsTV"
+        android:layout_width="27dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="6dp"
+        android:text="A B D C S"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NGBPScore" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
