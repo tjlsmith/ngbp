@@ -45,7 +45,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.038
+const val VERSION = 0.042
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -135,6 +135,8 @@ class MainActivity : AppCompatActivity() {
         editor.putFloat("eH", hExpected.toFloat())
         editor.putFloat("eNG", ngExpected.toFloat())
         editor.commit()
+        hWonLost.setText(hWINS.toString()+"-"+hLOSES.toString())
+        ngWonLost.setText(ngWINS.toString()+"-"+ngLOSES.toString())
         hELOText.setText(hELO.toString())
         ngELOText.setText(ngELO.toString())
 

@@ -11,6 +11,8 @@ class TitleActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title2)
 
+        titleVersionTextView.setText("V." + VERSION)
+
         TitleActivityLayout.setOnClickListener() {
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)

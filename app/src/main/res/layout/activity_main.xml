@@ -2058,7 +2058,7 @@
         android:id="@+id/NGBPPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="144dp"
         android:text="NGBP"
         android:textAlignment="center"
@@ -2073,13 +2073,11 @@
         android:id="@+id/HPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginBottom="243dp"
+        android:layout_marginTop="44dp"
         android:text="H"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/gameBanner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
         app:layout_constraintTop_toTopOf="parent" />
@@ -2088,7 +2086,7 @@
         android:id="@+id/HumanScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="20"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -2100,7 +2098,7 @@
         android:id="@+id/NGBPScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="20"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -2113,7 +2111,7 @@
         android:id="@+id/hSunkAnnouncer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="210dp"
         android:layout_marginBottom="170dp"
         android:background="@android:color/black"
         android:text="You sunk my Battleship!"
@@ -2130,7 +2128,7 @@
         android:id="@+id/cSunkAnnouncer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="102dp"
+        android:layout_marginBottom="80dp"
         android:background="@android:color/black"
         android:text="You sunk my Battleship!"
         android:textAlignment="center"
@@ -2145,10 +2143,8 @@
         android:id="@+id/hELOText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
         android:text="1500"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/HumanScore"
         app:layout_constraintTop_toBottomOf="@+id/HPoints" />
 
     <TextView
@@ -2158,5 +2154,25 @@
         android:text="1500"
         app:layout_constraintEnd_toEndOf="@id/NGBPScore"
         app:layout_constraintTop_toBottomOf="@+id/NGBPPoints" />
+
+    <TextView
+        android:id="@+id/hWonLost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0-0"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
+        app:layout_constraintTop_toBottomOf="@+id/hELOText" />
+
+    <TextView
+        android:id="@+id/ngWonLost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0-0"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
+        app:layout_constraintTop_toBottomOf="@+id/ngELOText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
