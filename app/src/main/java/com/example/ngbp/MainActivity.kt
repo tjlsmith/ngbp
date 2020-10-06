@@ -45,7 +45,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.046
+const val VERSION = 0.047
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -139,6 +139,8 @@ class MainActivity : AppCompatActivity() {
         ngWonLost.setText(ngWINS.toString()+"-"+ngLOSES.toString())
         hELOText.setText(hELO.toString())
         ngELOText.setText(ngELO.toString())
+        quitButton.setVisibility(View.GONE)
+        againButton.setVisibility(View.GONE)
 
         //val (secretNgbpBoard, shipList) = initTheGame()
         val secretNgbpBoard = initTheGame()

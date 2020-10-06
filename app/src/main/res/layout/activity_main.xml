@@ -22,6 +22,7 @@
 
         <!-- row 0 -->
         <!-- android:background="#FFFFFF" -->
+
         <ImageButton
             android:id="@+id/imageButtonC00"
             android:layout_width="30dp"
@@ -2038,7 +2039,36 @@
             android:background="@layout/imagebutton_border"
             app:layout_column="9"
             app:layout_row="9" />
+
     </androidx.gridlayout.widget.GridLayout>
+
+    <Button
+        android:id="@+id/againButton"
+        android:layout_width="169dp"
+        android:layout_height="139dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Play\nAgain ?"
+        app:layout_constraintBottom_toTopOf="@+id/NgbpGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NgbpGrid"
+        tools:visibility="gone" />
+
+    <Button
+        android:id="@+id/quitButton"
+        android:layout_width="169dp"
+        android:layout_height="139dp"
+        android:backgroundTint="#E92F1E"
+        android:text="Quit ?"
+        app:layout_column="2"
+        app:layout_constraintBottom_toTopOf="@+id/HumanGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HumanGrid"
+        app:layout_row="3"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/gameBanner"
@@ -2066,6 +2096,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/HumanGrid"
         app:layout_constraintTop_toBottomOf="@+id/gameBanner" />
 
@@ -2196,5 +2227,6 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NGBPScore" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
