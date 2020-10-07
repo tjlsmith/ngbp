@@ -2,6 +2,7 @@ package com.example.ngbp
 
 import android.bluetooth.BluetoothSocket
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -45,7 +46,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.047
+const val VERSION = 0.049
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -135,8 +136,8 @@ class MainActivity : AppCompatActivity() {
         editor.putFloat("eH", hExpected.toFloat())
         editor.putFloat("eNG", ngExpected.toFloat())
         editor.commit()
-        hWonLost.setText(hWINS.toString()+"-"+hLOSES.toString())
-        ngWonLost.setText(ngWINS.toString()+"-"+ngLOSES.toString())
+        hWonLost.setText(hWINS.toString() + "-" + hLOSES.toString())
+        ngWonLost.setText(ngWINS.toString() + "-" + ngLOSES.toString())
         hELOText.setText(hELO.toString())
         ngELOText.setText(ngELO.toString())
         quitButton.setVisibility(View.GONE)
@@ -244,7 +245,7 @@ class MainActivity : AppCompatActivity() {
             for ((i, el) in ngbpShipList.withIndex()) {
                 // change ngShipsTV
                 if (el.floating) {
-                    oS+=el.name[0]+" "
+                    oS += el.name[0] + " "
                 }
             }
             ngShipsTV.setText(oS)
@@ -253,7 +254,7 @@ class MainActivity : AppCompatActivity() {
                 cAnno.setVisibility(View.VISIBLE)
             }
         }
-        if (NGBPScore.text.toString().toInt() == 0) {
+        if (NGBPScore.text.toString().toInt() == 0 && gameMode != "OVER") {
             val hAnno = hSunkAnnouncer // as TextView
             hAnno.setText("Human Wins!")
             gameMode = "OVER"
@@ -270,6 +271,8 @@ class MainActivity : AppCompatActivity() {
             editor.putInt("ngLOSES", ngLOSES)
             editor.commit()
             hAnno.setVisibility(View.VISIBLE)
+            quitButton.setVisibility(View.VISIBLE)
+            againButton.setVisibility(View.VISIBLE)
         }
 
         // check here if computer made a hit
@@ -305,11 +308,11 @@ class MainActivity : AppCompatActivity() {
                 for ((i, el) in humanShipList.withIndex()) {
                     // change ngShipsTV
                     if (el.floating) {
-                        oS+=el.name[0]+" "
+                        oS += el.name[0] + " "
                     }
                 }
                 hShipsTV.setText(oS)
-                if (HumanScore.text.toString().toInt() == 0) {
+                if (HumanScore.text.toString().toInt() == 0 && gameMode != "OVER") {
                     // val cAnno = cSunkAnnouncer // as TextView
                     cAnno.setText("NGBP Wins!")
                     cAnno.setVisibility(View.VISIBLE)
@@ -326,6 +329,8 @@ class MainActivity : AppCompatActivity() {
                     editor.putInt("hELO", hELO)
                     editor.putInt("ngELO", ngELO)
                     editor.commit()
+                    quitButton.setVisibility(View.VISIBLE)
+                    againButton.setVisibility(View.VISIBLE)
                 } else {
                     if (shipSunk.length != 0) {
                         // val hAnno = hSunkAnnouncer // as TextView
@@ -376,4 +381,14 @@ class MainActivity : AppCompatActivity() {
         //HumanGrid.postInvalidate()
         //v.postInvalidate()
     } //kaboom
-}
+
+    fun restart(v: View?) {
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
+    }
+
+    fun byeNow(v: View?) {
+        finishAndRemoveTask();
+    }
+
+} // mainactivity
