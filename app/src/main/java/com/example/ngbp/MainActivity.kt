@@ -37,7 +37,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.050
+const val VERSION = 0.051
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -378,8 +378,10 @@ class MainActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         Runtime.getRuntime().exit(0)
-        fun byeNow(v: View?) {
-            finishAndRemoveTask();
-        }
+    }
+
+    fun byeNow(v: View?) {
+        finishAffinity()
+        System.exit(0)
     }
 } // mainactivity
