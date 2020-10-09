@@ -5,13 +5,13 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.pow
-
 
 // import kotlinx.android.synthetic.main.layout.view.*
 
@@ -37,7 +37,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.051
+const val VERSION = 0.052
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -158,6 +158,7 @@ class MainActivity : AppCompatActivity() {
         //drawBoard(true, HumanGrid) // init
         val dummy = 1
         // this.shipList = shipList
+
     } // big starting routine
 
     fun kaBoom(v: View?) {
