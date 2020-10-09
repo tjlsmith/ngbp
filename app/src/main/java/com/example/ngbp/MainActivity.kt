@@ -1,26 +1,17 @@
 package com.example.ngbp
 
-import android.bluetooth.BluetoothSocket
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.solver.widgets.ConstraintWidget.VISIBLE
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import java.sql.Time
-import java.time.Instant
-import java.time.Instant.now
-import java.time.LocalDateTime
-import java.time.LocalDateTime.now
-import java.time.LocalTime.now
-import java.util.*
-import kotlin.concurrent.schedule
 import kotlin.math.pow
+
 
 // import kotlinx.android.synthetic.main.layout.view.*
 
@@ -46,7 +37,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.049
+const val VERSION = 0.050
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -383,12 +374,12 @@ class MainActivity : AppCompatActivity() {
     } //kaboom
 
     fun restart(v: View?) {
-        val i = Intent(this, MainActivity::class.java)
-        startActivity(i)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        Runtime.getRuntime().exit(0)
+        fun byeNow(v: View?) {
+            finishAndRemoveTask();
+        }
     }
-
-    fun byeNow(v: View?) {
-        finishAndRemoveTask();
-    }
-
 } // mainactivity
