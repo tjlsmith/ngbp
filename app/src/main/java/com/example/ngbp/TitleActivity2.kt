@@ -10,19 +10,23 @@ import kotlinx.android.synthetic.main.activity_title2.*
 
 class TitleActivity2 : AppCompatActivity() {
 
+    var t = Handler() // https://stackoverflow.com/questions/64289287/turning-off-a-postdelayed-handler
+    val runnable = Runnable {
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title2)
 
         titleVersionTextView.setText("V." + VERSION)
 
-        Handler().postDelayed({
-            val i = Intent(this, MainActivity::class.java)
-            startActivity(i)
-            finish()
-        }, 3000.toLong())
+        t.postDelayed(runnable, 3000)
 
         TitleActivityLayout.setOnClickListener() {
+            t.removeCallbacks(runnable)
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
