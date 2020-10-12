@@ -2168,14 +2168,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:background="@android:color/black"
-    android:text="You sunk my Battleship!"
-    android:textAlignment="center"
-    android:textColor="#E91E63"
-    android:textSize="36sp"
-    android:visibility="invisible"
-    app:layout_constraintBottom_toBottomOf="@+id/HumanGrid"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+        android:text="You sunk my Battleship!"
+        android:textAlignment="center"
+        android:textColor="#E91E63"
+        android:textSize="36sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/HumanGrid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/hELOText"
