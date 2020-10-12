@@ -2079,6 +2079,7 @@
         android:clickable="true"
         android:text="Nuts Good Battleship Program\n V 0.001"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/HumanGrid"
         app:layout_constraintEnd_toEndOf="parent"
@@ -2094,6 +2095,7 @@
         android:layout_marginBottom="144dp"
         android:text="NGBP"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -2109,6 +2111,7 @@
         android:layout_marginTop="44dp"
         android:text="H"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -2121,6 +2124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="20"
+        android:textColor="@color/textcolor"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -2134,6 +2138,7 @@
         android:layout_marginTop="50dp"
         android:text="20"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -2163,20 +2168,21 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:background="@android:color/black"
-        android:text="You sunk my Battleship!"
-        android:textAlignment="center"
-        android:textColor="#E91E63"
-        android:textSize="36sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/HumanGrid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    android:text="You sunk my Battleship!"
+    android:textAlignment="center"
+    android:textColor="#E91E63"
+    android:textSize="36sp"
+    android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="@+id/HumanGrid"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/hELOText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1500"
+        android:textColor="@color/textcolor"
         app:layout_constraintEnd_toEndOf="@id/HumanScore"
         app:layout_constraintTop_toBottomOf="@+id/HPoints" />
 
@@ -2185,6 +2191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1500"
+        android:textColor="@color/textcolor"
         app:layout_constraintEnd_toEndOf="@id/NGBPScore"
         app:layout_constraintTop_toBottomOf="@+id/NGBPPoints" />
 
@@ -2194,6 +2201,7 @@
         android:layout_height="wrap_content"
         android:text="0-0"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
         app:layout_constraintTop_toBottomOf="@+id/hELOText" />
@@ -2204,6 +2212,7 @@
         android:layout_height="wrap_content"
         android:text="0-0"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/NgbpGrid"
         app:layout_constraintTop_toBottomOf="@+id/ngELOText" />
@@ -2215,6 +2224,7 @@
         android:layout_marginTop="6dp"
         android:text="A B D C S"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HumanScore" />
@@ -2226,6 +2236,7 @@
         android:layout_marginTop="6dp"
         android:text="A B D C S"
         android:textAlignment="center"
+        android:textColor="@color/textcolor"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NGBPScore" />
