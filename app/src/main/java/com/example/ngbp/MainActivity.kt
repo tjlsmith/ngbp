@@ -9,6 +9,7 @@ import android.os.Handler
 import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.pow
@@ -37,7 +38,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.055
+const val VERSION = 0.056
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
 
         // get rankings
         val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
+        val isDarkModeOn = sp.getBoolean("dakrMode", true)
         hELO = sp.getInt("hELO", 1500)
         hWINS = sp.getInt("hWINS", 0)
         hLOSES = sp.getInt("hLOSES", 0)
@@ -158,6 +160,10 @@ class MainActivity : AppCompatActivity() {
         //drawBoard(true, HumanGrid) // init
         val dummy = 1
         // this.shipList = shipList
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
 
     } // big starting routine
 
