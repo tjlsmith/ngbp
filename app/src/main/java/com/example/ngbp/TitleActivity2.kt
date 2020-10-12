@@ -28,7 +28,7 @@ class TitleActivity2 : AppCompatActivity() {
         t.postDelayed(runnable, 3000)
 
         val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
-        val isDarkModeOn = sp.getBoolean("dakrMode", true)
+        val isDarkModeOn = sp.getBoolean("darkMode", true)
         if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }

@@ -5,7 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
 
     <!-- for normal/light mode -->
-    <color name="backgroundcolor">#FCFCFC</color>
-    <color name="textcolor">#000000</color>
+    <color name="backgroundColor">#FCFCFC</color>
+    <color name="textColor">#000000</color>
 
 </resources>

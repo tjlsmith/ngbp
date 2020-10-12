@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
         // get rankings
         val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
-        val isDarkModeOn = sp.getBoolean("dakrMode", true)
+        val isDarkModeOn = sp.getBoolean("darkMode", true)
         hELO = sp.getInt("hELO", 1500)
         hWINS = sp.getInt("hWINS", 0)
         hLOSES = sp.getInt("hLOSES", 0)
