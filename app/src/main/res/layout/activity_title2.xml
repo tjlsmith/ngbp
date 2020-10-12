@@ -5,6 +5,7 @@
     android:id="@+id/TitleActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundcolor"
     android:clickable="true"
     tools:context=".TitleActivity2">
 
@@ -13,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="89dp"
+        android:textColor="@color/textcolor"
         android:text="NUTS"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
