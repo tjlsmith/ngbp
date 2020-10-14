@@ -38,7 +38,7 @@ data class Result(
     val hit: Boolean
 )
 
-const val VERSION = 0.057
+const val VERSION = 0.059
 const val CLOUD = -1
 const val CLEAR = 0
 const val WATER = 1

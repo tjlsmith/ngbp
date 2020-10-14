@@ -27,16 +27,20 @@ class TitleActivity2 : AppCompatActivity() {
 
         t.postDelayed(runnable, 3000)
 
-        val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
-        val isDarkModeOn = sp.getBoolean("darkMode", true)
-        if (isDarkModeOn) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }
-
         TitleActivityLayout.setOnClickListener() {
             t.removeCallbacks(runnable)
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
+
+        
+        val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
+        val isDarkModeOn = sp.getBoolean("darkMode", true)
+        if (isDarkModeOn) {
+            t.removeCallbacks(runnable)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+
     }
 }
