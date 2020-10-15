@@ -162,6 +162,7 @@ class MainActivity : AppCompatActivity() {
         // this.shipList = shipList
 
         if (isDarkModeOn) {
+            //t.removeCallbacks(runnable)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 

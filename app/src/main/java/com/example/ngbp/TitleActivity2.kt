@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.android.synthetic.main.activity_title2.*
 
-
 class TitleActivity2 : AppCompatActivity() {
 
     var t = Handler() // https://stackoverflow.com/questions/64289287/turning-off-a-postdelayed-handler
@@ -27,20 +26,18 @@ class TitleActivity2 : AppCompatActivity() {
 
         t.postDelayed(runnable, 3000)
 
-        TitleActivityLayout.setOnClickListener() {
+        TitleActivityLayout.setOnClickListener() { // click before timer expires ONLY RUN ON A CLICK
             t.removeCallbacks(runnable)
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
-
         
         val sp = getSharedPreferences("RATINGS", Context.MODE_PRIVATE)
         val isDarkModeOn = sp.getBoolean("darkMode", true)
-        if (isDarkModeOn) {
-            t.removeCallbacks(runnable)
+        if (isDarkModeOn) { // go dark mode THIS IS ALWAYS RUN
+            // t.removeCallbacks(runnable)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
-
 
     }
 }
